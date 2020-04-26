@@ -13,4 +13,5 @@ public class GunDefinition : ScriptableObject
     
     
     public GameObject gunModel;
+
 }
