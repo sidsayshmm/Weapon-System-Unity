@@ -13,5 +13,15 @@ public class GunDefinition : ScriptableObject
     
     
     public GameObject gunModel;
+    public EquippedGunStatus status;
 
+    public void Fire()
+    {
+        //Firing stuff here
+    }
+
+    public void Reload()
+    {
+        //Reload stuff here
+    }
 }

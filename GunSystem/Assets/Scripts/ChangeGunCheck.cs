@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquippedGun : MonoBehaviour
+public class ChangeGunCheck : MonoBehaviour
 {
     [SerializeField] public GunDefinition[] allGuns;
     public GunDefinition currentGun;
     public int currentGunIndex = 1;
+    public EquippedGunBehaviour egb;
 
     public void Start()
     {
         currentGun = allGuns[currentGunIndex];
+        egb = GetComponent<EquippedGunBehaviour>();
+        egb.OnChange(allGuns[currentGunIndex]);
     }
 
     public void Update()
@@ -27,7 +30,9 @@ public class EquippedGun : MonoBehaviour
         {
             allGuns[i].gunModel.SetActive(false);
         }
-        allGuns[currentGunIndex].gunModel.SetActive(true);
+        allGuns[updatedGunIndex].gunModel.SetActive(true);
+
+        egb.OnChange(allGuns[updatedGunIndex]);
     }
 
     public void NextWeapon()
@@ -48,5 +53,4 @@ public class EquippedGun : MonoBehaviour
 
         UpdateGun(currentGunIndex);
     }
-
 }
