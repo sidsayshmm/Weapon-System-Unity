@@ -9,6 +9,8 @@ public class ChangeGunCheck : MonoBehaviour
     public int currentGunIndex = 1;
     public EquippedGunBehaviour egb;
 
+    [SerializeField] public GameObject equippedGunObject;
+
     public void Start()
     {
         currentGun = allGuns[currentGunIndex];
@@ -26,13 +28,8 @@ public class ChangeGunCheck : MonoBehaviour
 
     public void UpdateGun(int updatedGunIndex)
     {
-        for (int i = 0; i < allGuns.Length; i++)
-        {
-            allGuns[i].gunModel.SetActive(false);
-        }
-        allGuns[updatedGunIndex].gunModel.SetActive(true);
-
         egb.OnChange(allGuns[updatedGunIndex]);
+        equippedGunObject.GetComponent<MeshFilter>().sharedMesh = allGuns[updatedGunIndex].model;
     }
 
     public void NextWeapon()
@@ -42,7 +39,6 @@ public class ChangeGunCheck : MonoBehaviour
             currentGunIndex = 0;
 
         UpdateGun(currentGunIndex);
-
     }
 
     public void PreviousWeapon()

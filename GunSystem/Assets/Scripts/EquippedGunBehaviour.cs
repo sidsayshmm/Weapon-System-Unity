@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(MeshRenderer))]
 public class EquippedGunBehaviour : MonoBehaviour
 {
     public GunDefinition currentGun;
-    public EquippedGunStatus egs;
+
     void Start()
     {
         
@@ -13,23 +15,34 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && egs.currentAmmo > 0)
+        if(Input.GetMouseButtonDown(0))
         {
-            //Fire from that gun.
-            currentGun.Fire();
-            egs.currentAmmo--;
+            Fire();
         }
 
         if(Input.GetKeyDown(KeyCode.R))
         {
-            currentGun.Reload();
-            egs.currentAmmo = currentGun.maxAmmo;
+            Reload();
         }
     }
 
     public void OnChange(GunDefinition newGunDef)
     {
         currentGun = newGunDef;
-        egs = newGunDef.status;
+    }
+
+    public void Fire()
+    {
+        //Fire stuff here
+    }
+
+    public void Reload()
+    {
+        //Reload stuff here
+    }
+
+    public void DrawCrosshair()
+    {
+
     }
 }

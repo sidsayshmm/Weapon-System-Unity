@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquippedGunStatus : MonoBehaviour
+public class AllGunStatus : MonoBehaviour
 {
     public int currentAmmo = 0;
+    public bool isReloading = false;
 }
