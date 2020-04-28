@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class AllGunStatus : MonoBehaviour
 {
-    public int currentAmmo = 0;
-    public bool isReloading = false;
+    public ChangeGunCheck cgc;
+
+    public int[] ammoAll;
+    public Dictionary<string, int> status;
+
+    public void Start()
+    {
+       status = new Dictionary<string, int>();
+       foreach(GunDefinition def in cgc.allGuns)
+       {
+            status.Add(def.gunName, def.maxAmmo);
+       }
+    }
 }

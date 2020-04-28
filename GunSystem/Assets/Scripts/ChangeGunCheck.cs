@@ -14,7 +14,7 @@ public class ChangeGunCheck : MonoBehaviour
     public void Start()
     {
         currentGun = allGuns[currentGunIndex];
-        egb = GetComponent<EquippedGunBehaviour>();
+        egb = egb.GetComponent<EquippedGunBehaviour>();
         egb.OnChange(allGuns[currentGunIndex]);
     }
 
@@ -28,6 +28,14 @@ public class ChangeGunCheck : MonoBehaviour
 
     public void UpdateGun(int updatedGunIndex)
     {
+        Debug.Log("Updating gun");
+        if(egb.isReloading)
+        {
+            Debug.Log("Cancelled Reload");
+            egb.isReloading = false;
+            StopCoroutine("Reload");
+        }
+
         egb.OnChange(allGuns[updatedGunIndex]);
         equippedGunObject.GetComponent<MeshFilter>().sharedMesh = allGuns[updatedGunIndex].model;
     }

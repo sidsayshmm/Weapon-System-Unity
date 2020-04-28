@@ -488,7 +488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 0}
-  egs: {fileID: 0}
+  inventory: {fileID: 0}
+  isReloading: 0
 --- !u!54 &2020161220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -517,6 +518,7 @@ GameObject:
   - component: {fileID: 2062785069}
   - component: {fileID: 2062785068}
   - component: {fileID: 2062785067}
+  - component: {fileID: 2062785071}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Untagged
@@ -601,3 +603,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2062785071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062785066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0212a03a0a7b44ebc75fbde1d3fdbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cgc: {fileID: 1111742600}
+  ammoAll: 

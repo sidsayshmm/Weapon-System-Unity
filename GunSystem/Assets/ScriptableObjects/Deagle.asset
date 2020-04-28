@@ -13,7 +13,16 @@ MonoBehaviour:
   m_Name: Deagle
   m_EditorClassIdentifier: 
   gunName: Deagle
+  model: {fileID: 0}
+  shotsPerRound: 1
+  firingRate: 0
+  maxAmmo: 8
+  maxClips: 4
   isAuto: 1
   isSemi: 0
-  maxAmmo: 8
-  gunModel: {fileID: 0}
+  isBurst: 0
+  burstPause: 0
+  burstCounter: 0
+  burstRate: 0
+  reloadTime: 2
+  nosePoint: {x: 0, y: 0, z: 0}

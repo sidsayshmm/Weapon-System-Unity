@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265815bb2e372024eab6407d234d7852, type: 3}
   m_Name: AUG
   m_EditorClassIdentifier: 
-  gunName: 
-  isAuto: 0
-  isSemi: 0
-  maxAmmo: 0
-  status: {fileID: 0}
+  gunName: AUG
   model: {fileID: 0}
+  shotsPerRound: 1
+  firingRate: 0
+  maxAmmo: 30
+  maxClips: 3
+  isAuto: 1
+  isSemi: 0
+  isBurst: 0
+  burstPause: 0
+  burstCounter: 0
+  burstRate: 0
+  reloadTime: 2
+  nosePoint: {x: 0, y: 0, z: 0}
