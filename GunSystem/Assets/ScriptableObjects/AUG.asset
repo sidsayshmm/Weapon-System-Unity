@@ -15,11 +15,13 @@ MonoBehaviour:
   gunName: AUG
   model: {fileID: 0}
   shotsPerRound: 1
-  firingRate: 0
+  firingRate: 5
   maxAmmo: 30
   maxClips: 3
   isAuto: 1
   isSemi: 0
+  isADS: 0
+  scopeInTime: 0
   isBurst: 0
   burstPause: 0
   burstCounter: 0

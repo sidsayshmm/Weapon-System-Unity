@@ -10,7 +10,7 @@ public class GunDefinition : ScriptableObject
     public Mesh model;
 
     public int shotsPerRound;
-    public int firingRate;
+    public float firingRate;
 
     public int maxAmmo;
     public int maxClips;

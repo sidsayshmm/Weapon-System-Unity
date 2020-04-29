@@ -15,11 +15,13 @@ MonoBehaviour:
   gunName: Deagle
   model: {fileID: 0}
   shotsPerRound: 1
-  firingRate: 0
+  firingRate: 1
   maxAmmo: 8
   maxClips: 4
   isAuto: 1
   isSemi: 0
+  isADS: 0
+  scopeInTime: 0
   isBurst: 0
   burstPause: 0
   burstCounter: 0
