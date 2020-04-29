@@ -33,17 +33,21 @@ public class ChangeGunCheck : MonoBehaviour
         {
             Debug.Log("Cancelled Reload");
             egb.isReloading = false;
-            StopCoroutine("Reload");
         }
 
         egb.OnChange(allGuns[updatedGunIndex]);
+        if (equippedGunObject.GetComponent<MeshFilter>() == null)
+        {
+            equippedGunObject.AddComponent<MeshFilter>();
+            Debug.Log("Adding shit!");
+        }
         equippedGunObject.GetComponent<MeshFilter>().sharedMesh = allGuns[updatedGunIndex].model;
     }
 
     public void NextWeapon()
     {
         currentGunIndex++;
-        if (currentGunIndex > allGuns.Length)
+        if (currentGunIndex >= allGuns.Length)
             currentGunIndex = 0;
 
         UpdateGun(currentGunIndex);
@@ -52,8 +56,8 @@ public class ChangeGunCheck : MonoBehaviour
     public void PreviousWeapon()
     {
         currentGunIndex--;
-        if (currentGunIndex <= 0)
-            currentGunIndex = allGuns.Length;
+        if (currentGunIndex < 0)
+            currentGunIndex = allGuns.Length-1;
 
         UpdateGun(currentGunIndex);
     }

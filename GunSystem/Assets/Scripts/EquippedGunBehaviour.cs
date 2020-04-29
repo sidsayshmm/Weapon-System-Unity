@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 [RequireComponent(typeof(MeshRenderer))]
 public class EquippedGunBehaviour : MonoBehaviour
 {
@@ -10,6 +12,11 @@ public class EquippedGunBehaviour : MonoBehaviour
     public AllGunStatus inventory;
 
     public bool isReloading = false;
+    public float timeLeft = 0f;
+    private bool readyToFire = true;
+    private bool usingADS = false;
+    private bool usingBurst = false;
+
     void Start()
     {
         inventory = inventory.GetComponent<AllGunStatus>();
@@ -17,19 +24,47 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        CheckInput();
+    }
+
+
+    public void CheckInput()
+    {
+        if (Input.GetMouseButtonDown(1))
         {
-            if (inventory.status[currentGun.name] <= 0)
-                DryFire();
-            else if (!isReloading) //check if it is still reloading
-                Fire();
+            if (currentGun.isBurst)
+                usingBurst = !usingBurst;
+            else if (currentGun.isADS)
+                usingADS = !usingADS;
+
         }
 
-        if(Input.GetKeyDown(KeyCode.R))
+
+        if (currentGun.isSemi)
         {
-            Reload();
+            if (Input.GetMouseButtonDown(0) && readyToFire)
+            {
+                //Fire once
+                if (usingADS)
+                    FireADS(); 
+                else
+                    Fire();
+                readyToFire = false;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+                readyToFire = true;
+        }
+        else if (currentGun.isAuto)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                Debug.Log("Firing from automatic!");
+                Fire(); //Keep firing!
+            }
         }
     }
+
 
     public void OnChange(GunDefinition newGunDef)
     {
@@ -43,23 +78,28 @@ public class EquippedGunBehaviour : MonoBehaviour
         inventory.status[currentGun.name]--;
     }
 
+    public void FireADS()
+    {
+
+    }
+
     public void DryFire()
     {
         //Do Something and the call reload
         Debug.Log("Ammo empty in " + currentGun.gunName);
         StartCoroutine("Reload");
+        Invoke("Reload", currentGun.reloadTime);
+        isReloading = true;
+        
     }
 
-    public IEnumerator Reload()
+    public void Reload()
     {
-        Debug.Log("Starting reload");
-        isReloading = true;
-        while(isReloading)
+        if(isReloading)
         {
+            isReloading = false;
             inventory.status[currentGun.name] = currentGun.maxAmmo;
-            yield return currentGun.reloadTime;
         }
-        isReloading = false;
     }
 
     public void DrawCrosshair()

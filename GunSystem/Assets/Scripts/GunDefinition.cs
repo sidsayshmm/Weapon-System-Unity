@@ -18,6 +18,9 @@ public class GunDefinition : ScriptableObject
     public bool isAuto;
     public bool isSemi;
 
+    public bool isADS;
+    public float scopeInTime;
+
 
     public bool isBurst;
     public int burstPause;
