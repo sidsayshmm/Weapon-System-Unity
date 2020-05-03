@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEditor.SceneManagement;
 
 
 [RequireComponent(typeof(MeshRenderer))]
@@ -19,6 +19,8 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     private float rateOfFire = 0;
     private float fireTimer = 0;
+
+    private bool ammoLeft = true;
     void Start()
     {
         inventory = inventory.GetComponent<AllGunStatus>();
@@ -26,6 +28,11 @@ public class EquippedGunBehaviour : MonoBehaviour
     
     private void Update()
     {
+        if (inventory.status[currentGun.name] <= 0)
+            ammoLeft = false;
+        else
+            ammoLeft = true;
+
         CheckInput();
     }
 
@@ -51,10 +58,12 @@ public class EquippedGunBehaviour : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && readyToFire && fireTimer >= rateOfFire) // Merge these conditions in Update later.
             {
                 //Fire once
-                if (usingADS)
-                    FireADS(); 
-                else
+                if (usingADS && ammoLeft)
+                    FireADS();
+                else if (ammoLeft)
                     Fire();
+                else
+                    DryFire();
                 readyToFire = false;
             }
 
@@ -62,15 +71,17 @@ public class EquippedGunBehaviour : MonoBehaviour
                 readyToFire = true;
         }
 
-        else if (currentGun.isAuto && fireTimer >= rateOfFire)
+        else if (currentGun.isAuto)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && fireTimer >= rateOfFire)
             {
                 //keep firing
-                if (usingADS)
-                    FireADS();   
-                else
+                if (usingADS && ammoLeft)
+                    FireADS();
+                else if (ammoLeft)
                     Fire();
+                else
+                    DryFire();
             }
         }
     }
@@ -82,9 +93,8 @@ public class EquippedGunBehaviour : MonoBehaviour
         usingADS = false;
         rateOfFire = 1 / currentGun.firingRate;
         fireTimer = rateOfFire;
-        Debug.Log("CurrentGunFiringRate " + currentGun.firingRate);
-        Debug.Log("Calculate rateOfFire" + rateOfFire);
-        Debug.Log("Current gun name " + currentGun.gunName + ". Max ammo = " + currentGun.maxAmmo + ". FireTimer " + fireTimer);
+        ammoLeft = true;
+        Debug.Log("Gun name " + currentGun.gunName + ". Max ammo = " + currentGun.maxAmmo + ". FireTimer " + fireTimer);
     }
 
     public void Fire()
@@ -106,19 +116,19 @@ public class EquippedGunBehaviour : MonoBehaviour
     public void DryFire()
     {
         //Do Something and the call reload
-        Debug.Log("Ammo empty in " + currentGun.gunName);
-        StartCoroutine("Reload");
         Invoke("Reload", currentGun.reloadTime);
         isReloading = true;   
     }
 
     public void Reload()
     {
+        Debug.Log("Starting Reload");
         if(isReloading)
         {
             isReloading = false;
             inventory.status[currentGun.name] = currentGun.maxAmmo;
         }
+        Debug.Log("Finished Reload");
     }
 
     public void DrawCrosshair()
