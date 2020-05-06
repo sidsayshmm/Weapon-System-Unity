@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: AK47
   model: {fileID: 0}
+  gunType: 0
+  burstType: 1
+  shootType: 0
+  shootMode: 0
   shotsPerRound: 1
   firingRate: 10
   maxAmmo: 30
   maxClips: 3
-  isAuto: 1
-  isSemi: 0
-  isADS: 0
+  burstOnly: 0
   scopeInTime: 0
-  isBurst: 0
   burstPause: 0
-  burstCounter: 0
   burstRate: 0
   reloadTime: 2
   nosePoint: {x: 0, y: 0, z: 0}

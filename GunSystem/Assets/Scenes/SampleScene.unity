@@ -740,6 +740,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b918ff814a25be547a98c7da34476329, type: 2}
   - {fileID: 11400000, guid: 317cd6ec384dba64d8661003b867ed3a, type: 2}
   - {fileID: 11400000, guid: f9e0e0a9ab775f245b21bf51377a33b2, type: 2}
+  - {fileID: 11400000, guid: 7a40b3a157b8e4045943afc504b1cbec, type: 2}
   currentGun: {fileID: 0}
   currentGunIndex: 1
   egb: {fileID: 2020161219}
