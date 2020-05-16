@@ -19,10 +19,10 @@ MonoBehaviour:
   shootType: 0
   shootMode: 0
   shotsPerRound: 1
-  firingRate: 15
+  firingRate: 5
   maxAmmo: 30
   maxClips: 3
-  burstOnly: 1
+  burstOnly: 0
   scopeInTime: 0
   burstPause: 2
   burstRate: 3

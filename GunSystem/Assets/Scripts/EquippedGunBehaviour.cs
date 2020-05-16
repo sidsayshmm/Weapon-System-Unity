@@ -10,6 +10,8 @@ public class EquippedGunBehaviour : MonoBehaviour
 {
     public GunDefinition currentGun;
     public AllGunStatus inventory;
+    public CurrentCircle currentCircle;
+
 
     public bool isReloading = false;
     public bool isScoping = false;
@@ -27,9 +29,12 @@ public class EquippedGunBehaviour : MonoBehaviour
     private int burstCounter;
 
     private bool ammoLeft = true;
+
+    private int continousFire=0;
     void Start()
     {
         inventory = inventory.GetComponent<AllGunStatus>();
+        currentCircle = GetComponent<CurrentCircle>();
     }
     
     private void Update()
@@ -55,13 +60,12 @@ public class EquippedGunBehaviour : MonoBehaviour
     {
         fireTimer += Time.fixedDeltaTime;
 
-
         if(usingBurst)
         {
             burstTimer += Time.fixedDeltaTime;
             if (burstTimer >= currentGun.burstPause)
             {
-                burstCounter = 0;
+                burstCounter = 1;
                 burstTimer = 0.0f;
             }
         }
@@ -84,7 +88,10 @@ public class EquippedGunBehaviour : MonoBehaviour
             if (currentGun.burstOnly)
                 return;
             else if (currentGun.burstType == BurstType.isBurst)
+            {
                 usingBurst = !usingBurst;
+                Debug.Log(usingBurst);
+            }
         }
     }
 
@@ -95,14 +102,20 @@ public class EquippedGunBehaviour : MonoBehaviour
 
         if (currentGun.gunType == GunType.Full)
         {
-            if(Input.GetMouseButton(0) && fireTimer >= rateOfFire && !isReloading && !isScoping)
+            if (Input.GetMouseButtonUp(0))
             {
-                readyToFire = false;
+                Debug.Log(continousFire);
+                continousFire = 0;
+            }
 
+            if (Input.GetMouseButton(0) && fireTimer >= rateOfFire && !isReloading && !isScoping)
+            {
+                readyToFire = true;
                 if (!ammoLeft)
                     DryFire();
                 else if (burstCounter <= currentGun.burstRate)
                 {
+                    continousFire++;
                     if (usingADS)
                         FireADS();
                     else
@@ -135,6 +148,7 @@ public class EquippedGunBehaviour : MonoBehaviour
     {
         currentGun = newGunDef;
         usingADS = false;
+        continousFire = 0;
 
         if (currentGun.burstOnly)
             usingBurst = true;
@@ -153,8 +167,8 @@ public class EquippedGunBehaviour : MonoBehaviour
         if (usingBurst)
             burstCounter++;
 
-        //Fire stuff here
-        Debug.Log("Firing");
+        currentCircle.SelectPoint();
+
         inventory.status[currentGun.name]--;
     }
 
@@ -164,8 +178,8 @@ public class EquippedGunBehaviour : MonoBehaviour
         if (usingBurst)
             burstCounter++;
 
-        //Firing from ADS here!
-        Debug.Log("Firing");
+        currentCircle.SelectPoint();
+
         inventory.status[currentGun.name]--;
     }
 
