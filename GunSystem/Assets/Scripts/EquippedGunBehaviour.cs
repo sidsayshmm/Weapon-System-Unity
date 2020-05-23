@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 
-
 [RequireComponent(typeof(MeshRenderer))]
 public class EquippedGunBehaviour : MonoBehaviour
 {
     public GunDefinition currentGun;
     public AllGunStatus inventory;
     public CurrentCircle currentCircle;
-
+    Vector3 startPoint;
 
     public bool isReloading = false;
     public bool isScoping = false;
@@ -30,7 +29,18 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     private bool ammoLeft = true;
 
-    private int continousFire=0;
+    public int continousFire=0;
+
+    internal int var1;
+    int var2;
+    private int var3;
+
+    private float nextActionTime = 0.0f;
+    public float period = 0.1f;
+
+
+
+    [SerializeField] [Range(10, 250)] public float currentAcc;
     void Start()
     {
         inventory = inventory.GetComponent<AllGunStatus>();
@@ -69,8 +79,20 @@ public class EquippedGunBehaviour : MonoBehaviour
                 burstTimer = 0.0f;
             }
         }
-    }
 
+        if(currentAcc < currentGun.maxAccuracy)
+        {
+            //add accgainpersec.
+            if (Time.fixedTime > nextActionTime)
+            {
+                //Debug.Log("Adding! " + Time.fixedTime + " Next Action Time = " + nextActionTime);
+                nextActionTime += period;
+                currentAcc += currentGun.accuracyGainPerSec;
+
+                if (currentAcc > currentGun.maxAccuracy) currentAcc = currentGun.maxAccuracy;
+            }
+        }
+    }
     public void CheckModeChange()
     {
         if (Input.GetMouseButtonDown(1))
@@ -104,7 +126,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log(continousFire);
+                Debug.Log("Mouse up");
                 continousFire = 0;
             }
 
@@ -127,7 +149,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         else if(currentGun.gunType == GunType.Semi)
         {
             if (Input.GetMouseButtonUp(0))
-                readyToFire = true;
+            { readyToFire = true;  Debug.Log("MouseUp"); }    
 
             if (Input.GetMouseButton(0) && fireTimer >= rateOfFire && readyToFire && !isReloading && !isScoping)
             {
@@ -146,10 +168,12 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     public void OnChange(GunDefinition newGunDef)
     {
+
+    
         currentGun = newGunDef;
         usingADS = false;
         continousFire = 0;
-
+        currentAcc = currentGun.maxAccuracy;
         if (currentGun.burstOnly)
             usingBurst = true;
         else
@@ -158,7 +182,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         rateOfFire = 1 / currentGun.firingRate;
         fireTimer = rateOfFire;
         ammoLeft = true;
-        Debug.Log("Gun name " + currentGun.gunName + ". Max ammo = " + currentGun.maxAmmo + ". FireTimer " + fireTimer);
+       // Debug.Log("Gun name " + currentGun.gunName + ". Max ammo = " + currentGun.maxAmmo + ". FireTimer " + fireTimer);
     }
 
     public void Fire()
@@ -167,7 +191,15 @@ public class EquippedGunBehaviour : MonoBehaviour
         if (usingBurst)
             burstCounter++;
 
-        currentCircle.SelectPoint();
+        // currentCircle.SelectPoint();
+        // Make a raycast from the received point
+        // if null fuck xD
+        currentAcc -= currentGun.accuracyDropPerShot;
+        if (currentAcc <= 0)
+            currentAcc = 10;
+
+        Vector2 selectedPoint; 
+        
 
         inventory.status[currentGun.name]--;
     }
@@ -178,7 +210,13 @@ public class EquippedGunBehaviour : MonoBehaviour
         if (usingBurst)
             burstCounter++;
 
-        currentCircle.SelectPoint();
+        //currentCircle.SelectPoint();
+        // Make a raycast from the received point
+        // if null fuck xD
+
+        currentAcc -= currentGun.accuracyDropPerShot;
+        if (currentAcc <= 0)
+            currentAcc = 10;
 
         inventory.status[currentGun.name]--;
     }
@@ -216,5 +254,45 @@ public class EquippedGunBehaviour : MonoBehaviour
     public void DrawCrosshair()
     {
 
+    }
+    
+    public void ShootStuff(Vector3 pos)
+    {
+        Camera cam = Camera.main;
+        Ray ray = cam.ScreenPointToRay(pos);
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
+
+        
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, 1000f);
+
+        foreach(RaycastHit hitp in hits)
+        {
+            Debug.Log(hitp);
+            //Get the appropriate hitpont...
+        }
+
+
+    }
+
+    public void ActualRay(Vector3 endPoint)
+    {
+         //Gun Muzzle
+        //Ray ray;
+
+        Vector3 direction = (endPoint - startPoint).normalized;
+
+
+        RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, 100000f, 0); //LayerMaskk???!?!??
+
+        RaycastHit[] ThiccCast = Physics.SphereCastAll(startPoint, 1f, direction, 100000f, 0); // LayerMask fix later?!
+
+
+        foreach (RaycastHit hitp in ThiccCast) // Or  (RaycastHit hitp in hits)
+        {
+            Debug.Log(hitp);
+            //Do damage according to path.
+            //break if reach a non - penetrable object.
+        }
     }
 }

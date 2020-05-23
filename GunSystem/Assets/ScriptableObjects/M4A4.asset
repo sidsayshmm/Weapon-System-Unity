@@ -22,6 +22,9 @@ MonoBehaviour:
   firingRate: 5
   maxAmmo: 30
   maxClips: 3
+  accuracyDropPerShot: 30
+  accuracyGainPerSec: 5
+  maxAccuracy: 240
   burstOnly: 0
   scopeInTime: 0
   burstPause: 0

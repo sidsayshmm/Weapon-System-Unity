@@ -43,6 +43,9 @@ public class GunDefinition : ScriptableObject
     public int maxAmmo;
     public int maxClips;
 
+    public float accuracyDropPerShot;
+    public float accuracyGainPerSec;
+    public float maxAccuracy;
 
     public bool burstOnly;
 
