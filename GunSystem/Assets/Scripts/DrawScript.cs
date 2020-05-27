@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// this script is no longer in use >_>
 public class DrawScript : MonoBehaviour
 {
     private LineRenderer lineRenderer;

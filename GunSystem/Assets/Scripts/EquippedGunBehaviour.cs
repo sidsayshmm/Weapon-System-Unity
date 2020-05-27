@@ -198,8 +198,8 @@ public class EquippedGunBehaviour : MonoBehaviour
         if (currentAcc <= 0)
             currentAcc = 10;
 
-        Vector2 selectedPoint; 
-        
+        Vector2 selectedPoint = new Vector2(currentCircle.pointD.x,currentCircle.pointD.y);
+        ShootStuff(selectedPoint);
 
         inventory.status[currentGun.name]--;
     }
@@ -256,7 +256,7 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     }
     
-    public void ShootStuff(Vector3 pos)
+    public void ShootStuff(Vector2 pos)
     {
         Camera cam = Camera.main;
         Ray ray = cam.ScreenPointToRay(pos);
@@ -269,10 +269,11 @@ public class EquippedGunBehaviour : MonoBehaviour
         foreach(RaycastHit hitp in hits)
         {
             Debug.Log(hitp);
-            //Get the appropriate hitpont...
+            //Get the appropriate hitpont... in hitPoint;
+            
         }
-
-
+        Vector3 hitPoint = hits[0].point;
+        ActualRay(hitPoint);
     }
 
     public void ActualRay(Vector3 endPoint)

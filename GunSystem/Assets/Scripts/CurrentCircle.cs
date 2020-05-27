@@ -104,7 +104,18 @@ public class CurrentCircle : MonoBehaviour
         sphere3.transform.position = new Vector3(cam.ScreenToWorldPoint(pointC).x, cam.ScreenToWorldPoint(pointC).y, -5f);
         sphere3.gameObject.name = "POINT C";
     }
+    
+    public void CreateCentrePoint(Vector2 point)
+    {
+        var spherex = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        spherex.transform.position = new Vector3(cam.ScreenToWorldPoint(point).x, cam.ScreenToWorldPoint(point).y, -5f); ;
+        spherex.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        spherex.GetComponent<Renderer>().material = mat2;
+     //   Debug.Log("Done");
+    }
+}
 
+/*
     public void SelectPoint()
     {
        // Debug.Log("Starting Point");
@@ -125,15 +136,4 @@ public class CurrentCircle : MonoBehaviour
         spherex.GetComponent<Renderer>().material = mat;
         //Debug.Log("Done");
     }
-    
-    public void CreateCentrePoint(Vector2 point)
-    {
-        var spherex = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        spherex.transform.position = new Vector3(cam.ScreenToWorldPoint(point).x, cam.ScreenToWorldPoint(point).y, -5f); ;
-        spherex.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        spherex.GetComponent<Renderer>().material = mat2;
-     //   Debug.Log("Done");
-    }
-
-
-}
+*/
