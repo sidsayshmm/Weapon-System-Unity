@@ -1,23 +1,45 @@
-﻿using UnityEngine;
-
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 public class TestingScene : MonoBehaviour
 {
-    // Create a plane, sphere and cube in the Scene.
+    Vector3 originPosition;
+    Quaternion originRotation;
+    [SerializeField] float shake_decay;
+    [SerializeField] float shake_intensity = 0f;
 
-    void Start()
+
+    void OnGUI()
     {
-        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        if (GUI.Button(new Rect(20, 40, 80, 20), "Shake"))
+        {
+            Shake();
+        }
+    }
 
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = new Vector3(0, 0.5f, 0);
+    void FixedUpdate()
+    {
+        if (shake_intensity > 0)
+        {
+            Debug.Log("Shaking");
+            transform.position = originPosition + Random.insideUnitSphere * shake_intensity;
+            transform.rotation = new Quaternion(
+                            originRotation.x + Random.Range(-shake_intensity, shake_intensity) * .2f,
+                            originRotation.y + Random.Range(-shake_intensity, shake_intensity) * .2f,
+                            originRotation.z + Random.Range(-shake_intensity, shake_intensity) * .2f,
+                            originRotation.w + Random.Range(-shake_intensity, shake_intensity) * .2f);
+            shake_intensity -= shake_decay;
+        }
 
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = new Vector3(0, 1.5f, 0);
+    }
 
-        GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-        capsule.transform.position = new Vector3(2, 1, 0);
+    void Shake()
+    {
+        originPosition = transform.position;
+        originRotation = transform.rotation;
+        shake_intensity = .3f;
+        shake_decay = 0.1f;
 
-        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        cylinder.transform.position = new Vector3(-2, 1, 0);
+        
     }
 }
