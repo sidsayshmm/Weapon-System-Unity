@@ -30,7 +30,7 @@ public class FPSMovement : MonoBehaviour
         zAxis = Input.GetAxis("Vertical");
         
 
-        Debug.Log(controller.isGrounded);
+       // Debug.Log(controller.isGrounded);
 
         moveDirection = new Vector3(xAxis, 0.0f, zAxis);
         moveDirection *= speed;

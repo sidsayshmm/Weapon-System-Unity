@@ -127,7 +127,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("Mouse up");
+               // Debug.Log("Mouse up");
                 continousFire = 0;
             }
 
@@ -269,7 +269,7 @@ public class EquippedGunBehaviour : MonoBehaviour
 
         foreach(RaycastHit hitp in hits)
         {
-            Debug.Log(hitp);
+            //Debug.Log(hitp);
             //Get the appropriate hitpont... in hitPoint;
             
         }

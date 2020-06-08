@@ -16,6 +16,9 @@ public class ChangeGunCheck : MonoBehaviour
         currentGun = allGuns[currentGunIndex];
         egb = egb.GetComponent<EquippedGunBehaviour>();
         egb.OnChange(allGuns[currentGunIndex]);
+
+
+       
     }
 
     public void Update()

@@ -31,7 +31,7 @@ public class FPSCrosshair : MonoBehaviour
     void Update()
     {
         float factor = egb.currentAcc/ egb.currentGun.maxAccuracy;
-        Debug.Log("FACTOR   " + factor);
+        //Debug.Log("FACTOR   " + factor);
         offset = Mathf.Lerp(80f, 6f, factor);
         //   GUI.Box(new Rect)
     }
