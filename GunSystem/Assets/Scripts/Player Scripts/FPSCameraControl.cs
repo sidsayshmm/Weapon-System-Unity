@@ -16,8 +16,6 @@ public class FPSCameraControl : MonoBehaviour
     
     float xRotation = 0f;
 
-    //public Transform camTransform;
-    public Vector3 lastRotation;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -44,35 +42,5 @@ public class FPSCameraControl : MonoBehaviour
         //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //erBody.GetComponent<Transform>().rotation = Quaternion.Euler(xRotation, 0f, 0f);
         //playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        Vector2 mouseInput = new Vector2(mouseX, mouseY);
-        if(mouseInput != null)
-        {
-            lastRotation = Camera.main.transform.rotation.eulerAngles;
-            //Debug.Log("RESET = " + Camera.main.transform.rotation);
-        }
     }
-
-    void GoUp()
-    {
-        //Rotate about x for up 
-        //Rotate about y for left/right recoil.
-    }
-
-    void GoDown()
-    {
-        //Start rotating downwards. 
-        //  transform.rotation = Quaternion.Slerp(transform.rotation, lastRotation, 5f * Time.deltaTime);
-        // transform.rotation = transform.Rotate(lastRotation * mouseSensitivity);
-
-        // transform.Rotate
-    }
-
-
-    /*
-     * delegate x = A + B;
-     * 
-     * 
-     * 
-     * 
-     */
 }

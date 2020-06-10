@@ -10,6 +10,7 @@ public class EquippedGunBehaviour : MonoBehaviour
     public GunDefinition currentGun;
     public AllGunStatus inventory;
     public CurrentCircle currentCircle;
+    public CameraRecoil camRecoil;
     Vector3 startPoint;
 
     public bool isReloading = false;
@@ -194,6 +195,9 @@ public class EquippedGunBehaviour : MonoBehaviour
         // currentCircle.SelectPoint();
         // Make a raycast from the received point
         // if null fuck xD
+
+        camRecoil.Recoil();
+
         currentAcc -= currentGun.accuracyDropPerShot;
         if (currentAcc <= 0)
             currentAcc = 10;
@@ -209,7 +213,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         fireTimer = 0f;
         if (usingBurst)
             burstCounter++;
-
+        camRecoil.Recoil();
         //currentCircle.SelectPoint();
         // Make a raycast from the received point
         // if null fuck xD

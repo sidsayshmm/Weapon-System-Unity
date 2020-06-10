@@ -1630,6 +1630,7 @@ MonoBehaviour:
   currentGun: {fileID: 0}
   inventory: {fileID: 2062785071}
   currentCircle: {fileID: 0}
+  camRecoil: {fileID: 963194229}
   isReloading: 0
   isScoping: 0
   continousFire: 0
