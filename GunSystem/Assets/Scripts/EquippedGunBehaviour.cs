@@ -55,7 +55,6 @@ public class EquippedGunBehaviour : MonoBehaviour
         else
             ammoLeft = true;
 
-
         CheckInput();
     }
 
@@ -198,25 +197,37 @@ public class EquippedGunBehaviour : MonoBehaviour
 
         camRecoil.Recoil();
 
+        Vector2 centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+        //  Vector2 selectedScreenPoint = centerPoint + Random.insideUnitCircle * radius;
+        Vector2 selectedScreenPoint = centerPoint;
+        Debug.Log($"Selected screen point {selectedScreenPoint}");
+        ShootStuff(selectedScreenPoint);
+
         currentAcc -= currentGun.accuracyDropPerShot;
         if (currentAcc <= 0)
             currentAcc = 10;
 
-        Vector2 selectedPoint = new Vector2(currentCircle.pointD.x,currentCircle.pointD.y);
-        ShootStuff(selectedPoint);
+       // Vector2 selectedPoint = new Vector2(currentCircle.pointD.x,currentCircle.pointD.y);
+       // ShootStuff(selectedPoint);
 
         inventory.status[currentGun.name]--;
     }
 
     public void FireADS()
     {
+        
+
         fireTimer = 0f;
         if (usingBurst)
             burstCounter++;
-        camRecoil.Recoil();
-        //currentCircle.SelectPoint();
-        // Make a raycast from the received point
-        // if null fuck xD
+        //camRecoil.Recoil();
+  
+        int radius = 1;
+        Vector2 centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+        //  Vector2 selectedScreenPoint = centerPoint + Random.insideUnitCircle * radius;
+        Vector2 selectedScreenPoint = centerPoint;
+        Debug.Log($"Selected screen point {selectedScreenPoint}");
+        ShootStuff(selectedScreenPoint);
 
         currentAcc -= currentGun.accuracyDropPerShot;
         if (currentAcc <= 0)
@@ -264,8 +275,7 @@ public class EquippedGunBehaviour : MonoBehaviour
     {
         Camera cam = Camera.main;
         Ray ray = cam.ScreenPointToRay(pos);
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
-
+        Debug.DrawRay(ray.origin, ray.direction*100, Color.red, 100f);
         
 
         RaycastHit[] hits = Physics.RaycastAll(ray, 1000f);
@@ -277,14 +287,24 @@ public class EquippedGunBehaviour : MonoBehaviour
             
         }
         Vector3 hitPoint = hits[0].point;
+        Decals(hits);
         ActualRay(hitPoint);
     }
+    public void Decals(RaycastHit[] hits)
+    {
+        GameObject x = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+     //   Instantiate(x, hits[0].point, Quaternion.FromToRotation(Vector3.up,hits[0].normal));
+    
+        x.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        x.gameObject.name = "F";
+        x.transform.position = hits[0].point;
 
+    }
     public void ActualRay(Vector3 endPoint)
     {
-         //Gun Muzzle
+        //Gun Muzzle
         //Ray ray;
-
+        startPoint = Camera.main.transform.position;
         Vector3 direction = (endPoint - startPoint).normalized;
 
 
@@ -292,6 +312,7 @@ public class EquippedGunBehaviour : MonoBehaviour
 
         RaycastHit[] ThiccCast = Physics.SphereCastAll(startPoint, 1f, direction, 100000f, 0); // LayerMask fix later?!
 
+    //    Debug.DrawRay(Camera.main.transform.position, direction * 100, Color.green, 100f);
 
         foreach (RaycastHit hitp in ThiccCast) // Or  (RaycastHit hitp in hits)
         {

@@ -33,11 +33,6 @@ public class FPSCameraControl : MonoBehaviour
         cameraDad.Rotate(Vector3.right * -mouseY);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("GOING ONCE");
-           // transform.Rotate(-5f, 0, 0);
-        }
 
         //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //erBody.GetComponent<Transform>().rotation = Quaternion.Euler(xRotation, 0f, 0f);

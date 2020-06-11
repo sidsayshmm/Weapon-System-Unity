@@ -8,7 +8,6 @@ public class TestingScene : MonoBehaviour
     [SerializeField] float shake_decay;
     [SerializeField] float shake_intensity = 0f;
 
-
     void OnGUI()
     {
         if (GUI.Button(new Rect(20, 40, 80, 20), "Shake"))
