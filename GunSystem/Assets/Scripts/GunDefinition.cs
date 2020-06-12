@@ -26,6 +26,18 @@ public enum ShootMode
     SingleShot
 }
 
+public enum LeftInput
+{
+    Fire,
+    FireBurst,
+    Single
+}
+public enum RightInput
+{
+    SwitchToBurst,
+    AddAttachment,
+    SwitchToADS
+}
 [CreateAssetMenu(fileName = "New GunDefinition", menuName = "GunTemplate")]
 public class GunDefinition : ScriptableObject
 {
@@ -36,7 +48,7 @@ public class GunDefinition : ScriptableObject
     public BurstType burstType;
     public ShootType shootType;
     public ShootMode shootMode;
-
+    public LeftInput leftInput;
     public int shotsPerRound;
     public float firingRate;
 

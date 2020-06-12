@@ -19,6 +19,7 @@ public class CameraRecoil : MonoBehaviour
     void Start()
     {
         initalAngle = transform.localEulerAngles; // save original angles 
+        //Debug.Log()
     }
     public void Recoil()
     {
@@ -29,7 +30,6 @@ public class CameraRecoil : MonoBehaviour
             targetY -= force;
         else
             targetY += force;
-
     }
     void Update()
     {

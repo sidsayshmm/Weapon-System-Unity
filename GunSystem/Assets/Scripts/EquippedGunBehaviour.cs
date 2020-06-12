@@ -216,7 +216,7 @@ public class EquippedGunBehaviour : MonoBehaviour
     public void FireADS()
     {
         
-
+        
         fireTimer = 0f;
         if (usingBurst)
             burstCounter++;
@@ -286,7 +286,9 @@ public class EquippedGunBehaviour : MonoBehaviour
             //Get the appropriate hitpont... in hitPoint;
             
         }
+
         Vector3 hitPoint = hits[0].point;
+        
         Decals(hits);
         ActualRay(hitPoint);
     }
