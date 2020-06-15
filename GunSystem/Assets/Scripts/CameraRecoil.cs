@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CameraRecoil : MonoBehaviour
 {
     float force = 10f;// controls recoil amplitude 

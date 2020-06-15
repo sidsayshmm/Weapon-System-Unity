@@ -288,7 +288,6 @@ public class EquippedGunBehaviour : MonoBehaviour
         }
 
         Vector3 hitPoint = hits[0].point;
-        
         Decals(hits);
         ActualRay(hitPoint);
     }
