@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New GunDefinition", menuName = "Prim ADS Burst Gun")]
 public class PrimaryADSBurstGuns : PrimaryADSGuns
 {
-    [SerializeField] protected float burstPause;
-    [SerializeField] protected float burstRate;
+    [SerializeField] public float burstPause;
+    [SerializeField] public float burstRate;
 }

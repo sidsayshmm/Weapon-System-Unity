@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,9 +33,6 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     public int continousFire=0;
 
-    internal int var1;
-    int var2;
-    private int var3;
 
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
@@ -46,6 +44,8 @@ public class EquippedGunBehaviour : MonoBehaviour
     {
         inventory = inventory.GetComponent<AllGunStatus>();
         currentCircle = GetComponent<CurrentCircle>();
+
+     //   Debug.Log(Mathf.Tan(Mathf.Deg2Rad * 45));
     }
     
     private void Update()
@@ -168,8 +168,6 @@ public class EquippedGunBehaviour : MonoBehaviour
 
     public void OnChange(GunDefinition newGunDef)
     {
-
-    
         currentGun = newGunDef;
         usingADS = false;
         continousFire = 0;

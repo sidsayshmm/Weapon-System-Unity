@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New GunDefinition", menuName = "Prim ADS Normal Gun")]
 public class PrimaryADSGuns : PrimaryGunsDefinition
 {
-
+    public float scopeInTime;
+    public float scopeOutTime;
 }

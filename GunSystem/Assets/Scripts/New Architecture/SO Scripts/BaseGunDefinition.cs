@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,16 +15,30 @@ public enum SightType
     Normal
 }
 
-public enum TypeShoot
+[Flags]
+public enum AvailableShootModes
+{
+    Normal = 0,
+    Burst = 1,
+    Single = 2
+}
+public enum DefaultShootMode
 {
     Normal,
-    Burst
+    Burst,
+    Single
 }
+
 public class BaseGunDefinition : ScriptableObject
 {
-    [SerializeField] protected WeaponType weaponType;
-    [SerializeField] protected SightType sightType;
-    [SerializeField] protected TypeShoot typeShoot;
-    [SerializeField] protected int clipSize;
-    [SerializeField] protected float reloadTime;
+    public WeaponType weaponType;
+    public SightType sightType;
+    public AvailableShootModes shootModes;
+    public DefaultShootMode defShootMode;
+    public int clipSize;
+    public float reloadTime;
+    public int shotsPerRound;
+    public float firingRate;
+    public bool modeChanges;
+    
 }

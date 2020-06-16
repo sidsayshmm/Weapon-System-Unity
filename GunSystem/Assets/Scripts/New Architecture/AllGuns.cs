@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New allGuns", menuName = "All Guns Holder")]
 public class AllGuns : ScriptableObject
 {
-    [SerializeField] List<PrimaryGunsDefinition> primGuns;
-    [SerializeField] List<SecondaryGunsDefinition> secoGuns;
+    public List<PrimaryGunsDefinition> primGuns;
+    public List<SecondaryGunsDefinition> secoGuns;
 }
