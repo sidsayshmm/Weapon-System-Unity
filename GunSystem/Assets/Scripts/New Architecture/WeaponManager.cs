@@ -6,18 +6,18 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private AllGuns allGuns;
-    [SerializeField] private int typeIndex;
-    [SerializeField] private int gunIndex;
+    public AllGuns allGuns;
+    [SerializeField] private int typeIndex = 1;
+    [SerializeField] private int gunIndex = 0;
     private BaseGunDefinition currentGun;
-    [SerializeField] private EquippedGun equippedGun;
+    private EquippedGun equippedGun;
 
     private void Start()
     {
         if (typeIndex == 1)
-            currentGun = allGuns.primGuns[gunIndex];
+            currentGun = allGuns.primaryGuns[gunIndex];
         else
-            currentGun = allGuns.secoGuns[gunIndex];
+            currentGun = allGuns.secondaryGuns[gunIndex];
 
         equippedGun.UpdateGun(currentGun);
     }

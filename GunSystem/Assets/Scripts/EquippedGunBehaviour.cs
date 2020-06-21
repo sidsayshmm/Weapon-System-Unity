@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(MeshRenderer))]
 public class EquippedGunBehaviour : MonoBehaviour
 {
-    [Header("xD")]
+    [Header("I know you know what this means")]
     public GunDefinition currentGun;
     public AllGunStatus inventory;
     public CurrentCircle currentCircle;

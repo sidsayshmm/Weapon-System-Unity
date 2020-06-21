@@ -9,17 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53231aa01a89f14e9b1bc99ffb81841, type: 3}
-  m_Name: Famas
+  m_Script: {fileID: 11500000, guid: 094959eabc9ae174c9a1fdc46e3cb26e, type: 3}
+  m_Name: Deagle
   m_EditorClassIdentifier: 
+  weaponName: Deagle
+  gunMesh: {fileID: 0}
   weaponType: 0
-  sightType: 0
-  shootModes: 0
+  sightType: 1
   defShootMode: 0
-  clipSize: 0
-  reloadTime: 0
-  shotsPerRound: 0
-  firingRate: 0
   modeChanges: 0
+  availableShootModes: 0
+  clipSize: 7
+  maxClips: 21
+  reloadTime: 2
+  shotsPerRound: 1
+  firingRate: 1
+  accuracyDropPerShot: 20
+  accuracyGainPerSec: 10
+  maxAccuracy: 200
+  scopeInTime: 0
+  scopeOutTime: 0
   burstPause: 0
   burstRate: 0

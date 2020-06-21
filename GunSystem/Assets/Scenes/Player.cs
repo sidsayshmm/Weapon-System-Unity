@@ -4,19 +4,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private float moveSpeed = 0.1f;
-    private float scrollSpeed = 10f;
-
-    void Update()
+    public GameObject player;
+    private Vector3 offset;
+    void Start()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            transform.position += moveSpeed * new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            transform.position += scrollSpeed * new Vector3(0, -Input.GetAxis("Mouse ScrollWheel"), 0);
-        }
+        offset = transform.position;
     }
-}
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        transform.position = player.transform.position + offset;
+    }
+}   

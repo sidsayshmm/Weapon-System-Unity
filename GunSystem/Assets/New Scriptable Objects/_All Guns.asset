@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e59feea56abd29e4291199fa40fc5315, type: 3}
-  m_Name: AUG
+  m_Script: {fileID: 11500000, guid: 29b0b21b71c48124e8d2e4eefb8fb8f5, type: 3}
+  m_Name: _All Guns
   m_EditorClassIdentifier: 
-  weaponType: 0
-  sightType: 0
-  typeShoot: 0
-  clipSize: 0
-  reloadTime: 0
-  shotsPerRound: 0
-  scopeInTime: 0
-  scopeOutTime: 0
+  primaryGuns:
+  - {fileID: 11400000, guid: 2de8837a1948eaa4797c3d8dfd3d26b0, type: 2}
+  - {fileID: 11400000, guid: 17078f209da0b514d9a3b637d057c0a9, type: 2}
+  secondaryGuns: []

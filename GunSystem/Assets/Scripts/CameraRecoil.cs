@@ -9,8 +9,8 @@ public class CameraRecoil : MonoBehaviour
     float dnSpeed = 6f; //how fast the weapon returns to original position
 
     private Vector3 initalAngle; // initial angle = 
-    [SerializeField] float targetX; // unfiltered recoil angle 
-    [SerializeField] float targetY;
+    private float targetX; // unfiltered recoil angle 
+    private float targetY;
     Vector3 newAngle = Vector3.zero; // smoothed angle
 
     private float factor = 0f;

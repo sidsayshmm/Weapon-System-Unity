@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New GunDefinition", menuName = "Prime Hip Normal Gun")]
+[CreateAssetMenu(fileName = "New GunDefinition", menuName = "New Primary Gun")]
 public class PrimaryGunsDefinition : BaseGunDefinition
 {
 

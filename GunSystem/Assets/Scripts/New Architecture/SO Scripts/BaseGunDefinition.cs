@@ -8,13 +8,11 @@ public enum WeaponType
     Primary,
     Secondary
 }
-
 public enum SightType
 {
     ADS,
     Normal
 }
-
 [Flags]
 public enum AvailableShootModes
 {
@@ -22,23 +20,43 @@ public enum AvailableShootModes
     Burst = 1,
     Single = 2
 }
-public enum DefaultShootMode
+public enum ShootModes
 {
     Normal,
     Burst,
     Single
 }
-
 public class BaseGunDefinition : ScriptableObject
 {
+    public string weaponName;
+    public Mesh gunMesh;
+    
+    [Header("Type")]
     public WeaponType weaponType;
     public SightType sightType;
-    public AvailableShootModes shootModes;
-    public DefaultShootMode defShootMode;
+
+    [Header("Modes")]
+    public ShootModes defShootMode;
+    public bool modeChanges;
+    public AvailableShootModes availableShootModes;
+
+    [Header("Basic Details")]
     public int clipSize;
+    public int maxClips;
     public float reloadTime;
     public int shotsPerRound;
     public float firingRate;
-    public bool modeChanges;
-    
+
+    [Header("Accuracy Details")]
+    public float accuracyDropPerShot;
+    public float accuracyGainPerSec;
+    public float maxAccuracy;
+
+    [Header("ADS Details")]
+    public float scopeInTime;  
+    public float scopeOutTime;
+
+    [Header("Burst Details")]
+    public float burstPause;
+    public float burstRate;
 }
