@@ -7,12 +7,18 @@ public class GunBehaviour : EquippedGun
 {
     Vector2 centerPoint;
     [SerializeField] Camera fpsCamera;
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
     }
 
     private void Update()
+    {
+        //Do I need this ? 
+    }
+
+    private void FixedUpdate()
     {
         
     }

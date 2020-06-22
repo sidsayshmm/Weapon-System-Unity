@@ -6,7 +6,7 @@ public class DisplayGunDetails : MonoBehaviour
 {
 
   //  public EquippedGunBehaviour egb;
-    public EquippedGun weaponManager;
+    public EquippedGun equippedGun;
 
     public TextMeshProUGUI currentAmmo;
     public TextMeshProUGUI gunName;
@@ -19,10 +19,13 @@ public class DisplayGunDetails : MonoBehaviour
     // Change this entire thing later from Update to when required only.
     void Update()
     {
-      //  currentAmmo.text = egb.inventory.status[egb.currentGun.name].ToString() + " / " + egb.currentGun.maxAmmo.ToString();
-        currentAmmo.text = weaponManager.inventory.status[weaponManager.currentGun.name].ToString() + " / " + weaponManager.currentGun.maxClips.ToString();
+        //  currentAmmo.text = egb.inventory.status[egb.currentGun.name].ToString() + " / " + egb.currentGun.maxAmmo.ToString();
+       // Debug.Log("0" + equippedGun.period);
+       // Debug.Log("1 " + equippedGun.inventory);
+       // Debug.Log("2 " + equippedGun.inventory.status[equippedGun.currentGun.name]);
+        currentAmmo.text = equippedGun.inventory.status[equippedGun.currentGun.name].ToString() + " / " + equippedGun.currentGun.maxClips.ToString();
         // gunName.text = egb.currentGun.gunName;
 
-        gunName.text = weaponManager.currentGun.name;
+        gunName.text = equippedGun.currentGun.name;
     }
 }

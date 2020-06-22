@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7232f31b5c5679040843072310025038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponManager: {fileID: 1111742600}
+  equippedGun: {fileID: 1111742600}
   currentAmmo: {fileID: 1341058263}
   gunName: {fileID: 193998670}
 --- !u!4 &659290679
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1004,10 +1004,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d7e06c171d4c541bd8c81ad1350bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allGuns: {fileID: 11400000, guid: 79fb728f699fa1045b81764a7a6e3d76, type: 2}
-  inventory: {fileID: 0}
+  inventory: {fileID: 1111742602}
   currentGun: {fileID: 0}
-  currentAcc: 10.187
+  gunBehaviour: {fileID: 2020161219}
+  currentAcc: 219
   period: 0.1
 --- !u!114 &1111742601
 MonoBehaviour:
@@ -1022,8 +1022,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allGuns: {fileID: 11400000, guid: 79fb728f699fa1045b81764a7a6e3d76, type: 2}
-  typeIndex: 0
+  typeIndex: 1
   gunIndex: 0
+  equippedGun: {fileID: 1111742600}
 --- !u!114 &1111742602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,12 +1652,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743cb4504a183b3418fd3f38b2f482fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allGuns: {fileID: 0}
-  inventory: {fileID: 0}
+  inventory: {fileID: 1111742602}
   currentGun: {fileID: 0}
-  currentAcc: 0
+  gunBehaviour: {fileID: 0}
+  currentAcc: 250
   period: 0.1
-  fpsCamera: {fileID: 0}
+  fpsCamera: {fileID: 963194227}
 --- !u!1 &2062785066
 GameObject:
   m_ObjectHideFlags: 0

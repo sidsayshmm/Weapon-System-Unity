@@ -10,10 +10,11 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private int typeIndex = 1;
     [SerializeField] private int gunIndex = 0;
     private BaseGunDefinition currentGun;
-    private EquippedGun equippedGun;
+    [SerializeField]private EquippedGun equippedGun;
 
-    private void Start()
+    public void Start()
     {
+        //Debug.Log("INITIALISING FIRST GUN");
         if (typeIndex == 1)
             currentGun = allGuns.primaryGuns[gunIndex];
         else
@@ -33,8 +34,10 @@ public class WeaponManager : MonoBehaviour
     private void ChangeWeapon(bool next)
     {
         // Use the bool next when meelee weapons added.
-        if (typeIndex == 1) typeIndex = 2;
-        else typeIndex = 1;
+        if (typeIndex == 1) 
+            typeIndex = 2;
+        else 
+            typeIndex = 1;
 
     }
 

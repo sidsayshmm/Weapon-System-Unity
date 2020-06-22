@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class EquippedGun : MonoBehaviour
 {
-    [SerializeField] protected AllGuns allGuns;
-    [SerializeField] public AllGunStatus inventory;
-    public BaseGunDefinition currentGun;
-
+  //  [SerializeField] protected AllGuns allGuns;
+    [HideInInspector] public AllGunStatus inventory;
+    [HideInInspector] public BaseGunDefinition currentGun;
+    public GunBehaviour gunBehaviour;
+    #region
+    [HideInInspector] public WeaponManager weaponManager;
     protected float fireTimer = 0f;
+    
     private float burstTimer;
     protected ShootModes currentShootMode;
     private bool usingADS;
@@ -20,30 +24,40 @@ public class EquippedGun : MonoBehaviour
     protected int burstCounter;
 
     [SerializeField] [Range(10, 250)] public float currentAcc;
-    
+    #endregion
 
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
 
-    void Start()
+    protected virtual void Awake()
     {
-       // inventory = inventory.GetComponent<AllGunStatus>();
+        inventory = GetComponent<AllGunStatus>();
+        weaponManager = GetComponent<WeaponManager>();
+        if (weaponManager != null)
+            Debug.Log("Calling object name =  " + gameObject.name + "Null check = " + weaponManager);
+        else
+            Debug.Log("Calling object name =  " + gameObject.name + "Null check = " + "Null");
+        
+        
         // New inventory.. ??
     }
 
+
+    //weaponManager.Start();
     private void FixedUpdate()
     {
         fireTimer += Time.fixedDeltaTime;
         if (currentShootMode == ShootModes.Burst)
         {
             burstTimer += Time.fixedDeltaTime;
-            // if(burstTimer >= currentGun.burstPause)
+            if(burstTimer >= currentGun.burstPause)
             {
                 burstCounter = 1;
                 burstTimer = 0.0f;
             }
         }
-
+        Debug.Log($"LOGGING MAX ACC {currentGun.maxAccuracy} AND 2nd PARAM = {this}", gameObject);
+            
         if (currentAcc < currentGun.maxAccuracy)
         {
             //add accgainpersec.
@@ -93,12 +107,19 @@ public class EquippedGun : MonoBehaviour
 
     public void UpdateGun(BaseGunDefinition newGun)
     {
+        if(newGun == null)
+        {
+            Debug.Log("NEW GUN IS NULL YOU COMPLETE IDIOT");
+        }
         currentGun = newGun;
+       // Debug.Log($"Updating Gun to {newGun} and current gun is {currentGun}");
         usingADS = false;
         continouosFire = 0;
         rateOfFire = 1.0f / currentGun.firingRate;
         doingAction = false;
         currentShootMode = currentGun.defShootMode;
+      //  Debug.Log($"Updated gun {currentGun}");
+        currentAcc = currentGun.maxAccuracy;
         // Primary and secondary..
     }
 
