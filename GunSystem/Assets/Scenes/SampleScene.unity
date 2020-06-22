@@ -1007,6 +1007,7 @@ MonoBehaviour:
   inventory: {fileID: 1111742602}
   currentGun: {fileID: 0}
   gunBehaviour: {fileID: 2020161219}
+  weaponManager: {fileID: 0}
   currentAcc: 219
   period: 0.1
 --- !u!114 &1111742601
@@ -1655,6 +1656,7 @@ MonoBehaviour:
   inventory: {fileID: 1111742602}
   currentGun: {fileID: 0}
   gunBehaviour: {fileID: 0}
+  weaponManager: {fileID: 0}
   currentAcc: 250
   period: 0.1
   fpsCamera: {fileID: 963194227}

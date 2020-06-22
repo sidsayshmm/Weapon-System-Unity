@@ -16,34 +16,29 @@ public class EquippedGun : MonoBehaviour
     
     private float burstTimer;
     protected ShootModes currentShootMode;
+    protected SightType currentSightMode;
     private bool usingADS;
     private int continouosFire;
     private float rateOfFire;
-    private bool doingAction = false;  // Actions like reloading, scoping etc
+ 
     private bool keyUp = true;
     protected int burstCounter;
 
-    [SerializeField] [Range(10, 250)] public float currentAcc;
+    [SerializeField] [ReadOnly] [Range(10, 250)] public float currentAcc;
     #endregion
-
+     
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
+
+    protected bool doingAction = false;// Actions like reloading, scoping etc
 
     protected virtual void Awake()
     {
         inventory = GetComponent<AllGunStatus>();
         weaponManager = GetComponent<WeaponManager>();
-        if (weaponManager != null)
-            Debug.Log("Calling object name =  " + gameObject.name + "Null check = " + weaponManager);
-        else
-            Debug.Log("Calling object name =  " + gameObject.name + "Null check = " + "Null");
-        
-        
-        // New inventory.. ??
+        //weaponManager.Start();
     }
 
-
-    //weaponManager.Start();
     private void FixedUpdate()
     {
         fireTimer += Time.fixedDeltaTime;
@@ -55,9 +50,7 @@ public class EquippedGun : MonoBehaviour
                 burstCounter = 1;
                 burstTimer = 0.0f;
             }
-        }
-        Debug.Log($"LOGGING MAX ACC {currentGun.maxAccuracy} AND 2nd PARAM = {this}", gameObject);
-            
+        }            
         if (currentAcc < currentGun.maxAccuracy)
         {
             //add accgainpersec.
@@ -99,9 +92,11 @@ public class EquippedGun : MonoBehaviour
         {
             keyUp = true;
         }
-        //if(currentGun.)
-
-        //currentGun.Fire(0,1);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!doingAction)
+                StartFire();
+        }
 
     }
 
@@ -123,11 +118,19 @@ public class EquippedGun : MonoBehaviour
         // Primary and secondary..
     }
 
+    protected void StartFire()
+    {
+        keyUp = false;
+        if (currentSightMode == SightType.ADS)
+            Debug.Log("");//Call derived ADSFire
+        else
+            Debug.Log("");//Call derived hipfire
+    }
+
     protected void Fire()
     {
 
     }
-
     protected virtual IEnumerator Reload()
     {
         yield return new WaitForSeconds(2f);

@@ -4,16 +4,9 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public GameObject player;
-    private Vector3 offset;
-    void Start()
+    [SerializeField] Vector3 screenPoint;
+    private void Update()
     {
-        offset = transform.position;
-    }
-
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        transform.position = player.transform.position + offset;
+        Debug.Log(Camera.main.ScreenToWorldPoint(screenPoint));
     }
 }   
