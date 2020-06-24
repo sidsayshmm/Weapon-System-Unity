@@ -287,7 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 288011273}
   - component: {fileID: 288011274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraDad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194230}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 1111742601}
   - component: {fileID: 1111742600}
   - component: {fileID: 1111742602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1631,7 +1631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2020161218}
   - component: {fileID: 2020161219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gun Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ GameObject:
   - component: {fileID: 2062785067}
   - component: {fileID: 2062785072}
   - component: {fileID: 2062785073}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FPSPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}

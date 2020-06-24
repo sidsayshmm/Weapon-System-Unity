@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
@@ -10,29 +11,35 @@ public class EquippedGun : MonoBehaviour
     [HideInInspector] public AllGunStatus inventory;
     [HideInInspector] public BaseGunDefinition currentGun; 
     [HideInInspector] public GunBehaviour gunBehaviour;
-    #region
     [HideInInspector] public WeaponManager weaponManager;
-    public float fireTimer = 0f;
-    
+
+    #region
+    [NonSerialized] public float fireTimer = 0f;
     public float burstTimer;
     public ShootModes currentShootMode;
     public SightType currentSightMode;
     public bool usingADS;
     public int continouosFire;
     public float rateOfFire;
-
     public bool keyUp = true;
     public int burstCounter;
-
-    [SerializeField] [ReadOnly] [Range(10, 250)] public float currentAcc;
-    #endregion
-
     public float nextActionTime = 0.0f;
     public float period = 0.1f;
 
-    public bool doingAction = false;// Actions like reloading, scoping etc
+    private bool doingAction = false;
+    private bool isReloading = false;
+    #endregion
 
-    protected virtual void Awake()
+    [SerializeField] [ReadOnly] [Range(10, 250)] public float currentAcc;
+   
+
+    // Actions possible are Reloading, Scoping in, Scoping out, Attachment , Changing
+
+    // Priority order...
+    //  Gun Change / Drop  then    Reloading       then     
+    //
+
+    private void Awake()
     {
         inventory = GetComponent<AllGunStatus>();
         weaponManager = GetComponent<WeaponManager>();
@@ -74,12 +81,12 @@ public class EquippedGun : MonoBehaviour
         CheckShoot();
     }
 
-    protected virtual void StartReload()
+    private void StartReload()
     {
-
+        StartCoroutine(Reload());
     }
 
-    protected void CheckModeChange()
+    private void CheckModeChange()
     {
         if(currentGun.modeChanges)
         {
@@ -93,7 +100,7 @@ public class EquippedGun : MonoBehaviour
         {
             keyUp = true;
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButton(0))
         {
             if (!doingAction)
                 CheckFire();
@@ -103,8 +110,8 @@ public class EquippedGun : MonoBehaviour
 
     public void CheckFire()
     {
-        if (fireTimer >= rateOfFire && !doingAction)
-            StartFire();
+        if (fireTimer >= rateOfFire)
+            ChooseFireMode();
     }
 
     public void UpdateGun(BaseGunDefinition newGun)
@@ -125,7 +132,7 @@ public class EquippedGun : MonoBehaviour
         // Primary and secondary..
     }
 
-    public void StartFire()
+    public void ChooseFireMode()
     {
      //   Debug.Log($"Just before calling fire functions... {currentGun}");
         keyUp = false;
@@ -140,8 +147,21 @@ public class EquippedGun : MonoBehaviour
        // Debug.Log($"Inside Fire() function... {currentGun}");
 
     }
-    public virtual IEnumerator Reload()
+    public IEnumerator Reload()
     {
-        yield return new WaitForSeconds(2f);
+        isReloading = true;
+        doingAction = true;
+        yield return new WaitForSeconds(currentGun.reloadTime);
+        isReloading = false;
+        doingAction = false;
     }
+
+    public IEnumerator GunChange()
+    {
+        doingAction = true;
+        yield return new WaitForSeconds(0.2f);
+        doingAction = false;
+    }
+
+
 }

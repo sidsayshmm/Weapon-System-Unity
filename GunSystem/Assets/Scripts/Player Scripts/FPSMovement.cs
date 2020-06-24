@@ -16,7 +16,7 @@ public class FPSMovement : MonoBehaviour
 
     //MovementSpeed
     public float speed = 6.0f;
-    public float jumpSpeed = 80.0f;
+    public float jumpSpeed = 810.0f;
     public float gravity = 20.0f;
 
     private void Start()
