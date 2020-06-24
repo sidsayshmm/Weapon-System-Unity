@@ -302,7 +302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288011272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: 0}
+  m_LocalPosition: {x: 0, y: 0.726, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -1008,8 +1008,19 @@ MonoBehaviour:
   currentGun: {fileID: 0}
   gunBehaviour: {fileID: 2020161219}
   weaponManager: {fileID: 0}
+  fireTimer: 0
+  burstTimer: 0
+  currentShootMode: 0
+  currentSightMode: 0
+  usingADS: 0
+  continouosFire: 0
+  rateOfFire: 0
+  keyUp: 1
+  burstCounter: 0
   currentAcc: 219
+  nextActionTime: 0
   period: 0.1
+  doingAction: 0
 --- !u!114 &1111742601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,13 +1664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743cb4504a183b3418fd3f38b2f482fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1111742602}
-  currentGun: {fileID: 0}
-  gunBehaviour: {fileID: 0}
-  weaponManager: {fileID: 0}
-  currentAcc: 250
-  period: 0.1
-  fpsCamera: {fileID: 963194227}
 --- !u!1 &2062785066
 GameObject:
   m_ObjectHideFlags: 0

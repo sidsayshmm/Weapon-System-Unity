@@ -307,9 +307,9 @@ public class EquippedGunBehaviour : MonoBehaviour
         Vector3 direction = (endPoint - startPoint).normalized;
 
 
-        RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, 100000f, 0); //LayerMaskk???!?!??
+       // RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, 100000f, 0); //LayerMaskk???!?!??
 
-        RaycastHit[] ThiccCast = Physics.SphereCastAll(startPoint, 1f, direction, 100000f, 0); // LayerMask fix later?!
+        RaycastHit[] ThiccCast = Physics.SphereCastAll(startPoint, 10f, direction, 100000f, 0); // LayerMask fix later?!
 
     //    Debug.DrawRay(Camera.main.transform.position, direction * 100, Color.green, 100f);
 

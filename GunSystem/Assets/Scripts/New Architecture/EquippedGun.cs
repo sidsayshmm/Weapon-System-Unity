@@ -8,34 +8,35 @@ public class EquippedGun : MonoBehaviour
 {
   //  [SerializeField] protected AllGuns allGuns;
     [HideInInspector] public AllGunStatus inventory;
-    [HideInInspector] public BaseGunDefinition currentGun;
-    public GunBehaviour gunBehaviour;
+    [HideInInspector] public BaseGunDefinition currentGun; 
+    [HideInInspector] public GunBehaviour gunBehaviour;
     #region
     [HideInInspector] public WeaponManager weaponManager;
-    protected float fireTimer = 0f;
+    public float fireTimer = 0f;
     
-    private float burstTimer;
-    protected ShootModes currentShootMode;
-    protected SightType currentSightMode;
-    private bool usingADS;
-    private int continouosFire;
-    private float rateOfFire;
- 
-    private bool keyUp = true;
-    protected int burstCounter;
+    public float burstTimer;
+    public ShootModes currentShootMode;
+    public SightType currentSightMode;
+    public bool usingADS;
+    public int continouosFire;
+    public float rateOfFire;
+
+    public bool keyUp = true;
+    public int burstCounter;
 
     [SerializeField] [ReadOnly] [Range(10, 250)] public float currentAcc;
     #endregion
-     
-    private float nextActionTime = 0.0f;
+
+    public float nextActionTime = 0.0f;
     public float period = 0.1f;
 
-    protected bool doingAction = false;// Actions like reloading, scoping etc
+    public bool doingAction = false;// Actions like reloading, scoping etc
 
     protected virtual void Awake()
     {
         inventory = GetComponent<AllGunStatus>();
         weaponManager = GetComponent<WeaponManager>();
+        gunBehaviour = GetComponentInChildren<GunBehaviour>();
         //weaponManager.Start();
     }
 
@@ -92,12 +93,18 @@ public class EquippedGun : MonoBehaviour
         {
             keyUp = true;
         }
-        if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButtonDown(0))
         {
             if (!doingAction)
-                StartFire();
+                CheckFire();
         }
 
+    }
+
+    public void CheckFire()
+    {
+        if (fireTimer >= rateOfFire && !doingAction)
+            StartFire();
     }
 
     public void UpdateGun(BaseGunDefinition newGun)
@@ -118,20 +125,22 @@ public class EquippedGun : MonoBehaviour
         // Primary and secondary..
     }
 
-    protected void StartFire()
+    public void StartFire()
     {
+     //   Debug.Log($"Just before calling fire functions... {currentGun}");
         keyUp = false;
         if (currentSightMode == SightType.ADS)
-            Debug.Log("");//Call derived ADSFire
+            gunBehaviour.ADSFire();
         else
-            Debug.Log("");//Call derived hipfire
+            gunBehaviour.HipFire();//Call derived hipfire
     }
 
-    protected void Fire()
+    public void Fire()
     {
+       // Debug.Log($"Inside Fire() function... {currentGun}");
 
     }
-    protected virtual IEnumerator Reload()
+    public virtual IEnumerator Reload()
     {
         yield return new WaitForSeconds(2f);
     }
