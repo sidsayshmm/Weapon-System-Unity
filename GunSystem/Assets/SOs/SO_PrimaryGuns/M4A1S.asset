@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61761013a0ca2334c81ff0fadb9f0398, type: 3}
-  m_Name: AK47
+  m_Name: M4A1S
   m_EditorClassIdentifier: 
-  weaponName: AK47
+  weaponName: M4A1S
   gunMesh: {fileID: 0}
   weaponType: 0
   sightType: 1
   defShootMode: 0
   modeChanges: 0
-  shootModes: 0
-  clipSize: 30
-  maxClips: 90
+  availableShootModes: 0
+  clipSize: 25
+  maxClips: 3
   reloadTime: 3
   shotsPerRound: 1
   firingRate: 5
-  accuracyDropPerShot: 50
+  accuracyDropPerShot: 30
   accuracyGainPerSec: 5
   maxAccuracy: 240
   scopeInTime: 0

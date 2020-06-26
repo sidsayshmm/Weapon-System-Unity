@@ -12,37 +12,39 @@ public class WeaponManager : MonoBehaviour
     private BaseGunDefinition currentGun;
     [SerializeField]private EquippedGun equippedGun;
 
-    public void Start()
+    public void Awake()
     {
-        //Debug.Log("INITIALISING FIRST GUN");
         if (typeIndex == 1)
             currentGun = allGuns.primaryGuns[gunIndex];
         else
             currentGun = allGuns.secondaryGuns[gunIndex];
 
         equippedGun.UpdateGun(currentGun);
+        //StartCoroutine(equippedGun.GunChange(currentGun, 0));
     }
 
     private void Update()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
             ChangeWeapon(true);
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
             ChangeWeapon(false);
     }
 
     private void ChangeWeapon(bool next)
     {
-        // Use the bool next when meelee weapons added.
-        if (typeIndex == 1) 
-            typeIndex = 2;
-        else 
-            typeIndex = 1;
+        if (next) typeIndex++;
+        else typeIndex--;
 
-    }
+        if (typeIndex > 2) typeIndex = 1;
+        else if (typeIndex <= 0) typeIndex = 2;
 
-    private void UpdateGun()
-    {
+        if (typeIndex == 1)
+            currentGun = allGuns.primaryGuns[gunIndex];
+        else
+            currentGun = allGuns.secondaryGuns[gunIndex];
 
+        var timer = typeIndex == 1 ? 2 : 1;
+        StartCoroutine(equippedGun.GunChange(currentGun, timer));
     }
 }

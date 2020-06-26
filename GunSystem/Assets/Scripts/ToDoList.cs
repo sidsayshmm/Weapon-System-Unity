@@ -5,8 +5,11 @@
     Re do architecture smh --- done
 
 
-    Update Gun Input such that, each SO stores what the left/right/middle mouse button would do
-    Make functions accordingly
+    Fix Gun scrolling
+    Add a drop gun feature howwwww>>>>>>>>>>>> 
+    >_>
+    Override all things when changing gun cancel reload scoping etc
+
 
 
     Make ADS Recoil slower. with horizontal slowly increasing
