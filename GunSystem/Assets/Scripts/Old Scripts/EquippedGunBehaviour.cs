@@ -220,8 +220,9 @@ public class EquippedGunBehaviour : MonoBehaviour
             burstCounter++;
         //camRecoil.Recoil();
   
-        int radius = 1;
+      //  int radius = 1;
         Vector2 centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+
         //  Vector2 selectedScreenPoint = centerPoint + Random.insideUnitCircle * radius;
         Vector2 selectedScreenPoint = centerPoint;
         Debug.Log($"Selected screen point {selectedScreenPoint}");

@@ -24,7 +24,7 @@ public class DisplayGunDetails : MonoBehaviour
     {
         timeSlider.maxValue = equippedGun.sliderMax;
         timeSlider.value = equippedGun.actionTime;
-        currentAmmo.text = equippedGun.inventory.status[equippedGun.currentGun.name].ToString() + " / " + equippedGun.currentGun.maxClips.ToString();
+        currentAmmo.text = equippedGun.inventory.status[equippedGun.currentGun.name].ToString() + " / " + equippedGun.currentGun.maxAmmo.ToString();
         gunName.text = equippedGun.currentGun.name;
     }
 }

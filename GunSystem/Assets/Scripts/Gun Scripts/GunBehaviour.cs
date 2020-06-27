@@ -10,7 +10,6 @@ public class GunBehaviour : MonoBehaviour
     private EquippedGun equippedGun;
     private void Awake()
     {
-        //base.Awake();
         fpsCamera = Camera.main;
         equippedGun = GetComponentInParent<EquippedGun>();
         centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);

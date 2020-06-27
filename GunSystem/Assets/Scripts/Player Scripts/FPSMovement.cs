@@ -40,7 +40,7 @@ public class FPSMovement : MonoBehaviour
             if (controller.isGrounded)
             {
                 moveDirection.y = jumpSpeed;
-                Debug.Log("JUMPING");
+               // Debug.Log("JUMPING");
             }
 
         }

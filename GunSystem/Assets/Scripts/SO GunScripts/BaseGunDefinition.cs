@@ -3,29 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
-{
-    Primary,
-    Secondary
-}
-public enum SightType
-{
-    ADS,
-    Normal
-}
-[Flags]
-public enum AvailableShootModes
-{
-    Normal = 0,
-    Burst = 1,
-    Single = 2
-}
-public enum ShootModes
-{
-    Normal,
-    Burst,
-    Single
-}
 public class BaseGunDefinition : ScriptableObject
 {
     public string weaponName;
@@ -42,7 +19,7 @@ public class BaseGunDefinition : ScriptableObject
 
     [Header("Basic Details")]
     public int clipSize;
-    public int maxClips;
+    public int maxAmmo;
     public float reloadTime;
     public int shotsPerRound;
     public float firingRate;

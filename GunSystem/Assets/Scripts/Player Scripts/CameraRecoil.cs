@@ -13,7 +13,7 @@ public class CameraRecoil : MonoBehaviour
     private float targetY;
     Vector3 newAngle = Vector3.zero; // smoothed angle
 
-    private float factor = 0f;
+    //private float factor = 0f;
 
     void Start()
     {

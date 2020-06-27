@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int numberMax;
+    [SerializeField] private int numberMax = 0;
     private void Update()
     {
         if (Input.GetMouseButtonUp(0))

@@ -12,6 +12,8 @@ public class WeaponManager : MonoBehaviour
     private BaseGunDefinition currentGun;
     [SerializeField]private EquippedGun equippedGun;
 
+    private Coroutine x;
+
     public void Awake()
     {
         if (typeIndex == 1)
@@ -20,7 +22,6 @@ public class WeaponManager : MonoBehaviour
             currentGun = allGuns.secondaryGuns[gunIndex];
 
         equippedGun.UpdateGun(currentGun);
-        //StartCoroutine(equippedGun.GunChange(currentGun, 0));
     }
 
     private void Update()
@@ -33,6 +34,11 @@ public class WeaponManager : MonoBehaviour
 
     private void ChangeWeapon(bool next)
     {
+        if(x!=null)
+        {
+            StopCoroutine(x);
+            equippedGun.doingAction = false;
+        }
         if (next) typeIndex++;
         else typeIndex--;
 
@@ -45,6 +51,6 @@ public class WeaponManager : MonoBehaviour
             currentGun = allGuns.secondaryGuns[gunIndex];
 
         var timer = typeIndex == 1 ? 2 : 1;
-        StartCoroutine(equippedGun.GunChange(currentGun, timer));
+        x = StartCoroutine(equippedGun.GunChange(currentGun, timer));
     }
 }

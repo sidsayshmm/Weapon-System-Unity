@@ -8,17 +8,18 @@ using UnityEngine.UIElements;
 
 public class EquippedGun : MonoBehaviour
 {
-  //  [SerializeField] protected AllGuns allGuns;
+
     [HideInInspector] public AllGunStatus inventory;
-    [HideInInspector] public BaseGunDefinition currentGun; 
+    [NonSerialized] public BaseGunDefinition currentGun; 
     [HideInInspector] public GunBehaviour gunBehaviour;
     [HideInInspector] public WeaponManager weaponManager;
 
     #region
-    [NonSerialized] public float fireTimer = 0f;
-    public float burstTimer;
     public ShootModes currentShootMode;
     public SightType currentSightMode;
+
+    [NonSerialized] public float fireTimer = 0f;
+    public float burstTimer;
     public bool usingADS;
     public int continouosFire;
     public float rateOfFire;
@@ -34,24 +35,14 @@ public class EquippedGun : MonoBehaviour
     public float sliderMax = 1f;
     #endregion
 
-    public LayerMask mask;
-
+    private Coroutine reloadCoroutine;
     [ReadOnly] [Range(10, 250)] public float currentAcc;
-   
-
-    // Actions possible are Reloading, Scoping in, Scoping out, Attachment , Changing
-
-    // Priority order...
-    //  Gun Change / Drop  then    Reloading       then     
-    //
 
     private void Awake()
     {
         inventory = GetComponent<AllGunStatus>();
         weaponManager = GetComponent<WeaponManager>();
         gunBehaviour = GetComponentInChildren<GunBehaviour>();
-        Debug.Log(rateOfFire);      
-        //weaponManager.Start();
     }
 
     private void FixedUpdate()
@@ -68,21 +59,20 @@ public class EquippedGun : MonoBehaviour
         }            
         if (currentAcc < currentGun.maxAccuracy)
         {
-            //add accgainpersec.
             if (Time.fixedTime > nextActionTime)
             {
-                //Debug.Log("Adding! " + Time.fixedTime + " Next Action Time = " + nextActionTime);
                 nextActionTime += period;
                 currentAcc += currentGun.accuracyGainPerSec;
 
-                if (currentAcc > currentGun.maxAccuracy) currentAcc = currentGun.maxAccuracy;
+                if (currentAcc > currentGun.maxAccuracy) 
+                    currentAcc = currentGun.maxAccuracy;
             }
         }
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            StartCoroutine(Reload());
+            reloadCoroutine = StartCoroutine(Reload());
         if (Input.GetKey(KeyCode.Mouse2))
             CheckModeChange();
         CheckShoot();
@@ -98,14 +88,12 @@ public class EquippedGun : MonoBehaviour
             if (actionTime < 0)
                 actionTime = 0;
         }
-
-        Debug.Log(actionTime);
     }
 
     private void DryFire()
     {
-        //Do Dry Fire Stuff and call Reload
-        StartCoroutine(Reload());
+        //Do reload stuff.
+        reloadCoroutine = StartCoroutine(Reload());
     }
 
 
@@ -128,7 +116,6 @@ public class EquippedGun : MonoBehaviour
             if (!doingAction)
                 CheckFire();
         }
-
     }
 
     public void CheckFire()
@@ -144,53 +131,55 @@ public class EquippedGun : MonoBehaviour
             Debug.Log("NEW GUN IS NULL YOU COMPLETE IDIOT");
         }
         currentGun = newGun;
-       // Debug.Log($"Updating Gun to {newGun} and current gun is {currentGun}");
         usingADS = false;
         continouosFire = 0;
         rateOfFire = 1.0f / currentGun.firingRate;
-        Debug.Log($"New Firing rate = {rateOfFire}");
         doingAction = false;
         currentShootMode = currentGun.defShootMode;
-      //  Debug.Log($"Updated gun {currentGun}");
         currentAcc = currentGun.maxAccuracy;
-        // Primary and secondary..
     }
 
     public void ChooseFireMode()
     {
-     //   Debug.Log($"Just before calling fire functions... {currentGun}");
         keyUp = false;
         if (currentSightMode == SightType.ADS)
             gunBehaviour.ADSFire();
         else
-            gunBehaviour.HipFire();//Call derived hipfire
+            gunBehaviour.HipFire();
     }
 
     public void Fire()
     {
         SetSlider(rateOfFire);
         actionTime = rateOfFire;
-        Debug.Log($"New timer value = {actionTime}");
-        Debug.Log($"Inside Fire() function... {currentGun}");
-
     }
+
     public IEnumerator Reload()
     {
-        Debug.Log("Starting reload");
         SetSlider(currentGun.reloadTime);
+
         actionTime = currentGun.reloadTime;
         isReloading = true;
         doingAction = true;
+
         yield return new WaitForSeconds(currentGun.reloadTime);
+
         isReloading = false;
         doingAction = false;
         inventory.status[currentGun.name] = currentGun.clipSize;
-        Debug.Log("Ending reload");
     }
 
     public IEnumerator GunChange(BaseGunDefinition newGunDef, float timer)
     {
-        doingAction = true;        
+        if(isReloading)
+        {
+            StopCoroutine(reloadCoroutine);
+            doingAction = false;
+            isReloading = false;
+            actionTime = 0;
+        }
+        doingAction = true;
+        actionTime = timer;
         yield return new WaitForSeconds(timer);
         UpdateGun(newGunDef);
         doingAction = false;
@@ -200,5 +189,4 @@ public class EquippedGun : MonoBehaviour
     {
         sliderMax = maxVal;
     }
-
 }
