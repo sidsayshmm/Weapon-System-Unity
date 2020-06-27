@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -36,6 +37,7 @@ public class EquippedGun : MonoBehaviour
     #endregion
 
     private Coroutine reloadCoroutine;
+    private Coroutine scopeCoroutine;
     [ReadOnly] [Range(10, 250)] public float currentAcc;
 
     private void Awake()
@@ -73,8 +75,7 @@ public class EquippedGun : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
             reloadCoroutine = StartCoroutine(Reload());
-        if (Input.GetKey(KeyCode.Mouse2))
-            CheckModeChange();
+        CheckModeChange();
         CheckShoot();
 
         if(inventory.status[currentGun.name]<=0 && !doingAction)
@@ -99,9 +100,13 @@ public class EquippedGun : MonoBehaviour
 
     private void CheckModeChange()
     {
-        if(currentGun.modeChanges)
+        if(currentGun.sightType == SightType.ADS)
         {
-
+            if(Input.GetMouseButton(1) && !doingAction)
+            {
+                Debug.Log("Starting scope");
+                scopeCoroutine = StartCoroutine(Scoping(currentGun.scopeInTime));
+            }
         }
     }
 
@@ -136,6 +141,7 @@ public class EquippedGun : MonoBehaviour
         rateOfFire = 1.0f / currentGun.firingRate;
         doingAction = false;
         currentShootMode = currentGun.defShootMode;
+        currentSightMode = SightType.Normal;
         currentAcc = currentGun.maxAccuracy;
     }
 
@@ -184,6 +190,23 @@ public class EquippedGun : MonoBehaviour
         UpdateGun(newGunDef);
         doingAction = false;
     }
+
+    public IEnumerator Scoping(float timer)
+    {
+        Debug.Log($"Starting scoping at {Time.time}");
+        doingAction = true;
+        actionTime = timer;
+        yield return new WaitForSeconds(timer);
+        doingAction = false;
+        if (currentSightMode == SightType.ADS)
+            currentSightMode = SightType.Normal;
+        else
+            currentSightMode = SightType.ADS;
+
+        Debug.Log($"Current shoot mode = { currentSightMode} at {Time.time} ");
+        
+    }
+
 
     private void SetSlider(float maxVal)
     {

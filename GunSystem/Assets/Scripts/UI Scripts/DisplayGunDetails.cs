@@ -14,6 +14,7 @@ public class DisplayGunDetails : MonoBehaviour
     public TextMeshProUGUI gunName;
     public Slider timeSlider;
     public float x;
+
     void Start()
     {
         

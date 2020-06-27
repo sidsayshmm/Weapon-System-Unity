@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryGuns:
   - {fileID: 11400000, guid: 2de8837a1948eaa4797c3d8dfd3d26b0, type: 2}
-  - {fileID: 11400000, guid: 17078f209da0b514d9a3b637d057c0a9, type: 2}
+  - {fileID: 11400000, guid: e0a82fb8cb7289145b6dc86b31ea4e92, type: 2}
   secondaryGuns:
   - {fileID: 11400000, guid: 98f37251770dbf847931b7328821ebad, type: 2}
   - {fileID: 11400000, guid: a08c7c047c69f5f4c99ee82cd2606493, type: 2}
