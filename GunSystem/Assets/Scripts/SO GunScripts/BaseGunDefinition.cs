@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BaseGunDefinition : ScriptableObject
 {
@@ -36,4 +33,14 @@ public class BaseGunDefinition : ScriptableObject
     [Header("Burst Details")]
     public float burstPause;
     public float burstRate;
+
+    public virtual void HipFire()
+    {
+
+    }
+
+    public virtual void ADSFire()
+    {
+
+    }
 }

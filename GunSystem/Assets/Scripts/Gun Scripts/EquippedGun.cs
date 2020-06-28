@@ -87,7 +87,10 @@ public class EquippedGun : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            reloadCoroutine = StartCoroutine(Reload());
+        {
+            if(!isReloading)
+                reloadCoroutine = StartCoroutine(Reload());
+        }
         CheckModeChange();
         CheckShoot();
 
@@ -180,6 +183,7 @@ public class EquippedGun : MonoBehaviour
         SetSlider(rateOfFire);
         actionTime = rateOfFire;
     }
+
     public IEnumerator Reload()
     {
         SetSlider(currentGun.reloadTime);
@@ -213,7 +217,6 @@ public class EquippedGun : MonoBehaviour
         UpdateGun(newGunDef);
         doingAction = false;
     }
-
     public IEnumerator Scoping(float timer)
     {
         Debug.Log($"Starting scoping at {Time.time}");
