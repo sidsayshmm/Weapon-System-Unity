@@ -1,58 +1,74 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace MyTests
 {
-    [SerializeField] private int numberMax = 0;
-    private void Update()
+    public class Player : MonoBehaviour
     {
-        if (Input.GetMouseButtonUp(0))
+        Vector2 centerPoint;
+        private Camera fpsCamera;
+
+        float force = 50f;// controls recoil amplitude 
+        float upSpeed = 9f; // controls smoothing speed var dnSpeed: 
+        float dnSpeed = 6f; //how fast the weapon returns to original position
+        private Vector3 initalAngle; // initial angle = 
+        private float targetX; // unfiltered recoil angle 
+        private float targetY;
+        Vector3 newAngle = Vector3.zero; // smoothed angle
+
+
+        [SerializeField] bool usingRecoil;
+
+        private void Awake()
         {
-            Matrix4x4 localToWorld = transform.localToWorldMatrix;
-
-            Mesh mesh = GetComponent<MeshFilter>().mesh;
-            Vector3[] vertices = mesh.vertices;
-            Debug.Log($"Length = {vertices.Length }    Mesh Vertices : ");
-
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                vertices[i] = localToWorld.MultiplyPoint3x4(vertices[i]);
-            }
-
-            vertices = BubbleSort(vertices);
-            Vector3 totalPosition = Vector3.zero;
-            for (int i = 0; i < numberMax; i++)
-            {
-
-                //Debug.Log(vertices[i]);
-                totalPosition += vertices[i];
-            }
-            totalPosition = totalPosition / numberMax;
-
-            var decal = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            decal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            decal.transform.position = totalPosition;
+            fpsCamera = Camera.main;
+            centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+            initalAngle = fpsCamera.transform.localEulerAngles;
         }
-    }
 
-
-    Vector3[] BubbleSort(Vector3[] vertices)
-    {
-        int n = vertices.Length;
-
-        for (int i = 0; i < n - 1; i++)
+        private void Update()
         {
-            for (int j = 0; j < n - i - 1; j++)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (vertices[j].y < vertices[j + 1].y)
-                {
-                    Vector3 temp = vertices[j];
-                    vertices[j] = vertices[j + 1];
-                    vertices[j + 1] = temp;
-                }
+                Recoil();
+                ShootStuff(centerPoint);
             }
+
+            newAngle.x = Mathf.Lerp(newAngle.x, targetX, upSpeed * Time.deltaTime);   // Calculate the vertical rotation to wanna push up
+            newAngle.y = Mathf.Lerp(newAngle.y, targetY, upSpeed * Time.deltaTime); // Calculate the horizontal rotation you wanna push up
+                                                                                    //To do. Make this randomized to left||right
+            fpsCamera.transform.localEulerAngles = initalAngle - newAngle; // move the camera upwards.
+
+            targetX = Mathf.Lerp(targetX, 0, dnSpeed * Time.deltaTime);
+            targetY = Mathf.Lerp(targetY, 0, dnSpeed * Time.deltaTime);
+            centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
         }
-        return vertices;
+
+        private void LateUpdate()
+        {
+            Debug.DrawRay(fpsCamera.transform.position, fpsCamera.transform.forward * 100, Color.green);
+        }
+
+        private void ShootStuff(Vector2 screenPointToFire)
+        {
+            Ray ray = fpsCamera.ScreenPointToRay(screenPointToFire);
+            Vector3 goalPoint = Vector3.zero;
+
+            RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
+
+            Debug.DrawRay(fpsCamera.transform.position, fpsCamera.transform.forward * 100, Color.red, 100f);
+        }
+
+        private void Recoil()
+        {
+            targetX += force;
+
+            if (targetY >= 0)
+                targetY -= force;
+            else
+                targetY += force;
+        }
     }
 }

@@ -17,6 +17,7 @@ public class WeaponManager : MonoBehaviour
 
     public void Awake()
     {
+        equippedGun = GetComponent<EquippedGun>();
         if (typeIndex == 1)
             currentGun = allGuns.primaryGuns[gunIndex];
         else

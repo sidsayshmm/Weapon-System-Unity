@@ -22,7 +22,7 @@ public class EquippedGun : MonoBehaviour
     [NonSerialized] public float fireTimer = 0f;
     public float burstTimer;
     public bool usingADS;
-    public int continouosFire;
+    public int continuousFire = 0;
     public float rateOfFire;
     public bool keyUp = true;
     public int burstCounter;
@@ -139,6 +139,7 @@ public class EquippedGun : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             keyUp = true;
+            continuousFire = 0;
         }
         else if (Input.GetMouseButton(0))
         {
@@ -161,7 +162,7 @@ public class EquippedGun : MonoBehaviour
         }
         currentGun = newGun;
         usingADS = false;
-        continouosFire = 0;
+        continuousFire = 0;
         rateOfFire = 1.0f / currentGun.firingRate;
         doingAction = false;
         currentShootMode = currentGun.defShootMode;
@@ -180,8 +181,10 @@ public class EquippedGun : MonoBehaviour
 
     public void Fire()
     {
+        continuousFire++;
         SetSlider(rateOfFire);
         actionTime = rateOfFire;
+        inventory.status[currentGun.name]--;
     }
 
     public IEnumerator Reload()
