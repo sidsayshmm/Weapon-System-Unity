@@ -35,10 +35,4 @@ public class FPSCameraControl : MonoBehaviour
         //erBody.GetComponent<Transform>().rotation = Quaternion.Euler(xRotation, 0f, 0f);
         //playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.tag == "")
-            Debug.Log("");
-    }
 }
