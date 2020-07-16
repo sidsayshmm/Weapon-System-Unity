@@ -10,24 +10,24 @@ public class GunBehaviour : MonoBehaviour
     private EquippedGun equippedGun;
 
 
-    float force = 10f;// controls recoil amplitude 
-    float upSpeed = 9f; // controls smoothing speed var dnSpeed: 
-    float dnSpeed = 6f; //how fast the weapon returns to original position
-    private Vector3 initalAngle; // initial angle = 
+    private float force = 10f;// controls recoil amplitude 
+    private float upSpeed = 9f; // controls smoothing speed var dnSpeed: 
+    private float dnSpeed = 6f; //how fast the weapon returns to original position
+    private Vector3 initialAngle; // initial angle = 
     private float targetX; // unfiltered recoil angle 
     private float targetY;
-    Vector3 newAngle = Vector3.zero; // smoothed angle
-    Ray ray;
+    private Vector3 newAngle = Vector3.zero; // smoothed angle
+    private Ray ray;
 
 
-    [SerializeField] bool usingRecoil;
+    [SerializeField] bool usingRecoil = true;
 
     private void Awake()
     {
         fpsCamera = Camera.main;
         equippedGun = GetComponentInParent<EquippedGun>();
-        centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
-        initalAngle = fpsCamera.transform.localEulerAngles;
+        centerPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        initialAngle = fpsCamera.transform.localEulerAngles;
     }
 
     private void Update()
@@ -36,7 +36,7 @@ public class GunBehaviour : MonoBehaviour
         newAngle.x = Mathf.Lerp(newAngle.x, targetX, upSpeed * Time.deltaTime);   // Calculate the vertical rotation to wanna push up
         newAngle.y = Mathf.Lerp(newAngle.y, targetY, upSpeed * Time.deltaTime); // Calculate the horizontal rotation you wanna push up
                                                                                 //To do. Make this randomized to left||right
-        fpsCamera.transform.localEulerAngles = initalAngle - newAngle; // move the camera upwards.
+        fpsCamera.transform.localEulerAngles = initialAngle - newAngle; // move the camera upwards.
 
         targetX = Mathf.Lerp(targetX, 0, dnSpeed * Time.deltaTime);
         targetY = Mathf.Lerp(targetY, 0, dnSpeed * Time.deltaTime);
@@ -96,7 +96,7 @@ public class GunBehaviour : MonoBehaviour
 
     private void ShootStuff(Vector2 screenPointToFire)
     {
-        Vector3 goalPoint = Vector3.zero;
+        var goalPoint = Vector3.zero;
 
         RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100f);
@@ -134,7 +134,7 @@ public class GunBehaviour : MonoBehaviour
             Debug.Log("Min");
             targetX += UnityEngine.Random.Range(force / 2, force);
         }
-        else if( value >= 3 && value <= 8)
+        else if(value <= 8)
         {
             Debug.Log("Med");
             targetX += UnityEngine.Random.Range(force / 2, force);
@@ -152,8 +152,5 @@ public class GunBehaviour : MonoBehaviour
             else
                 targetY += force;
         }
-        
-
-        
     }
 }

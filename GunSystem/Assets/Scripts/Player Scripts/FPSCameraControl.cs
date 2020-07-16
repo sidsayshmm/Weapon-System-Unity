@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class FPSCameraControl : MonoBehaviour
@@ -37,5 +34,11 @@ public class FPSCameraControl : MonoBehaviour
         //transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //erBody.GetComponent<Transform>().rotation = Quaternion.Euler(xRotation, 0f, 0f);
         //playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.tag == "")
+            Debug.Log("");
     }
 }

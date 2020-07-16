@@ -8,6 +8,8 @@ public class PrimaryGunsDefinition : BaseGunDefinition
     public override void HipFire()
     {
         base.HipFire();
+        Camera x = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        Collider.
     }
 
     public override void ADSFire()
