@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
 public class EquippedGun : MonoBehaviour
 {
@@ -21,7 +18,7 @@ public class EquippedGun : MonoBehaviour
 
     [NonSerialized] public float fireTimer = 0f;
     public float burstTimer;
-    public bool usingADS;
+    public bool usingAds;
     public int continuousFire = 0;
     public float rateOfFire;
     public bool keyUp = true;
@@ -43,7 +40,7 @@ public class EquippedGun : MonoBehaviour
     private Coroutine scopeCoroutine;
     [ReadOnly] [Range(10, 250)] public float currentAcc;
 
-
+    private Vector2 centerPoint;
     #region Properties
     
     public float CurrentAccuracy
@@ -58,6 +55,11 @@ public class EquippedGun : MonoBehaviour
         inventory = GetComponent<AllGunStatus>();
         weaponManager = GetComponent<WeaponManager>();
         gunBehaviour = GetComponentInChildren<GunBehaviour>();
+    }
+
+    private void Start()
+    {
+       centerPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
     }
 
     private void FixedUpdate()
@@ -116,7 +118,7 @@ public class EquippedGun : MonoBehaviour
 
     private void CheckModeChange()
     {
-        if(currentGun.sightType == SightType.ADS)
+        if(currentGun.sightType == SightType.Ads)
         {
             if(Input.GetMouseButton(1) && !doingAction)
             {
@@ -128,7 +130,10 @@ public class EquippedGun : MonoBehaviour
             {
                 float scopeOutTime = Time.time - startScopeTime;
                 if (scopeCoroutine != null)
+                {
                     StopCoroutine(scopeCoroutine);
+                    Debug.Log("Reversing SIGHT MODE WITHOUT COMPLETION");
+                }
                 scopeCoroutine = StartCoroutine(Scoping(scopeOutTime));
             }
         }
@@ -148,7 +153,7 @@ public class EquippedGun : MonoBehaviour
         }
     }
 
-    public void CheckFire()
+    private void CheckFire()
     {
         if (fireTimer >= rateOfFire)
             ChooseFireMode();
@@ -158,10 +163,10 @@ public class EquippedGun : MonoBehaviour
     {
         if(newGun == null)
         {
-            Debug.Log("NEW GUN IS NULL YOU COMPLETE IDIOT");
+            throw new Exception("Gun is null. Good luck you fucking idiot");
         }
         currentGun = newGun;
-        usingADS = false;
+        usingAds = false;
         continuousFire = 0;
         rateOfFire = 1.0f / currentGun.firingRate;
         doingAction = false;
@@ -170,13 +175,21 @@ public class EquippedGun : MonoBehaviour
         currentAcc = currentGun.maxAccuracy;
     }
 
-    public void ChooseFireMode()
+    private void ChooseFireMode()
     {
         keyUp = false;
-        if (currentSightMode == SightType.ADS)
-            gunBehaviour.ADSFire();
+        if (currentSightMode == SightType.Ads)
+        {
+            gunBehaviour.AdsFire();
+            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint);
+            currentGun.AdsFire(shootData);
+        }
         else
+        {
             gunBehaviour.HipFire();
+            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint);
+            currentGun.AdsFire(shootData);
+        }
     }
 
     public void Fire()
@@ -187,7 +200,7 @@ public class EquippedGun : MonoBehaviour
         inventory.status[currentGun.name]--;
     }
 
-    public IEnumerator Reload()
+    private IEnumerator Reload()
     {
         SetSlider(currentGun.reloadTime);
 
@@ -220,10 +233,12 @@ public class EquippedGun : MonoBehaviour
         UpdateGun(newGunDef);
         doingAction = false;
     }
-    public IEnumerator Scoping(float timer)
+    private IEnumerator Scoping(float timer)
     {
-        Debug.Log($"Starting scoping at {Time.time}");
-        Debug.Log(timer);
+        if (currentSightMode == SightType.Ads)
+            currentSightMode = SightType.Normal;
+        else
+            currentSightMode = SightType.Ads;
         doingAction = true;
         isScoping = true;
         actionTime = timer;
@@ -231,10 +246,7 @@ public class EquippedGun : MonoBehaviour
         yield return new WaitForSeconds(timer);
 
         doingAction = false;
-        if (currentSightMode == SightType.ADS)
-            currentSightMode = SightType.Normal;
-        else
-            currentSightMode = SightType.ADS;
+       
 
         isScoping = false;
         doingAction = false;

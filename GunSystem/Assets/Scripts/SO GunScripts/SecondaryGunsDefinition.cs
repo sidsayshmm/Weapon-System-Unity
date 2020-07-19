@@ -1,17 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New GunDefinition", menuName = "New Secondary Gun")]
 public class SecondaryGunsDefinition : BaseGunDefinition
 {
-    public override void HipFire()
+    public override void AdsFire(ShootData shootData)
     {
-        base.HipFire();
+        AddAdsRecoil(shootData.gunObject);
     }
 
-    public override void ADSFire()
+    public override void HipFire(ShootData shootData)
     {
-        base.ADSFire();
+        AddHipRecoil(shootData.gunObject);
+    }
+
+    public override void AddAdsRecoil(GameObject gunModel)
+    {
+
+    }
+
+    public override void AddHipRecoil(GameObject gunModel)
+    {
+
     }
 }

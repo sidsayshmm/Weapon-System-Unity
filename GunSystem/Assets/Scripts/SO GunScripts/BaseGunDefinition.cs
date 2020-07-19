@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BaseGunDefinition : ScriptableObject
+public abstract class BaseGunDefinition : ScriptableObject, IShootable , IRecoilable
 {
     public string weaponName;
     public Mesh gunMesh;
@@ -33,14 +33,9 @@ public class BaseGunDefinition : ScriptableObject
     [Header("Burst Details")]
     public float burstPause;
     public float burstRate;
-
-    public virtual void HipFire()
-    {
-
-    }
-
-    public virtual void ADSFire()
-    {
-
-    }
+    
+    public abstract void AdsFire(ShootData shootData);
+    public abstract void HipFire(ShootData shootData);
+    public abstract void AddAdsRecoil(GameObject gunModel);
+    public abstract void AddHipRecoil(GameObject gunModel);
 }

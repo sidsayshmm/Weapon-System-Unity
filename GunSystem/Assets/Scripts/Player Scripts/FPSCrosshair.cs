@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSCrosshair : MonoBehaviour
+public class FpsCrosshair : MonoBehaviour
 {
     private Texture2D texture;
     private GUIStyle lineStyle;
@@ -56,11 +56,11 @@ public class FPSCrosshair : MonoBehaviour
         }
     }
 
-    void SetColor(Texture2D _texture, Color _color)
+    void SetColor(Texture2D texture, Color color)
     {
-        for (int i = 0; i < _texture.height; i++)
-            for (int j = 0; j < _texture.width; j++)
-                _texture.SetPixel(i, j, _color);
-        _texture.Apply();
+        for (int i = 0; i < texture.height; i++)
+            for (int j = 0; j < texture.width; j++)
+                texture.SetPixel(i, j, color);
+        texture.Apply();
     }
 }

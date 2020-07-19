@@ -10,13 +10,13 @@ public enum GunType
 
 public enum BurstType
 {
-    isBurst,
-    noBurst
+    IsBurst,
+    NoBurst
 }
 
 public enum ShootType
 {
-    ADS,
+    Ads,
     Hipfire
 }
 
@@ -36,7 +36,7 @@ public enum RightInput
 {
     SwitchToBurst,
     AddAttachment,
-    SwitchToADS
+    SwitchToAds
 }
 [CreateAssetMenu(fileName = "New GunDefinition", menuName = "GunTemplate")]
 public class GunDefinition : ScriptableObject

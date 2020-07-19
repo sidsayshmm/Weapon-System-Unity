@@ -19,7 +19,7 @@ public class EquippedGunBehaviour : MonoBehaviour
 
 
     private bool readyToFire = true;
-    private bool usingADS = false;
+    private bool usingAds = false;
     private bool usingBurst = false;
 
     private float rateOfFire = 0;
@@ -97,9 +97,9 @@ public class EquippedGunBehaviour : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (currentGun.shootType == ShootType.ADS)
+            if (currentGun.shootType == ShootType.Ads)
             {
-                usingADS = !usingADS;
+                usingAds = !usingAds;
                 isScoping = true;
                 Invoke("ModifyScope", currentGun.scopeInTime);
             }
@@ -109,7 +109,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         {
             if (currentGun.burstOnly)
                 return;
-            else if (currentGun.burstType == BurstType.isBurst)
+            else if (currentGun.burstType == BurstType.IsBurst)
             {
                 usingBurst = !usingBurst;
                 Debug.Log(usingBurst);
@@ -138,8 +138,8 @@ public class EquippedGunBehaviour : MonoBehaviour
                 else if (burstCounter <= currentGun.burstRate)
                 {
                     continousFire++;
-                    if (usingADS)
-                        FireADS();
+                    if (usingAds)
+                        FireAds();
                     else
                         Fire();
                 }
@@ -157,8 +157,8 @@ public class EquippedGunBehaviour : MonoBehaviour
                     DryFire();
                 else if (burstCounter <= currentGun.burstRate)
                 {
-                    if (usingADS)
-                        FireADS();
+                    if (usingAds)
+                        FireAds();
                     else
                         Fire();
                 }
@@ -169,7 +169,7 @@ public class EquippedGunBehaviour : MonoBehaviour
     public void OnChange(GunDefinition newGunDef)
     {
         currentGun = newGunDef;
-        usingADS = false;
+        usingAds = false;
         continousFire = 0;
         currentAcc = currentGun.maxAccuracy;
         if (currentGun.burstOnly)
@@ -211,7 +211,7 @@ public class EquippedGunBehaviour : MonoBehaviour
         inventory.status[currentGun.name]--;
     }
 
-    public void FireADS()
+    public void FireAds()
     {
         
         
@@ -310,11 +310,11 @@ public class EquippedGunBehaviour : MonoBehaviour
 
        // RaycastHit[] hits = Physics.RaycastAll(startPoint, direction, 100000f, 0); //LayerMaskk???!?!??
 
-        RaycastHit[] ThiccCast = Physics.SphereCastAll(startPoint, 10f, direction, 100000f, 0); // LayerMask fix later?!
+        RaycastHit[] thiccCast = Physics.SphereCastAll(startPoint, 10f, direction, 100000f, 0); // LayerMask fix later?!
 
     //    Debug.DrawRay(Camera.main.transform.position, direction * 100, Color.green, 100f);
 
-        foreach (RaycastHit hitp in ThiccCast) // Or  (RaycastHit hitp in hits)
+        foreach (RaycastHit hitp in thiccCast) // Or  (RaycastHit hitp in hits)
         {
             Debug.Log(hitp);
             //Do damage according to path.

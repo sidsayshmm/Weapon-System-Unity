@@ -1,5 +1,5 @@
 ﻿public enum SightType
 {
-    ADS,
+    Ads,
     Normal
 }
