@@ -1,15 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
 
 public class Testt : MonoBehaviour
 {
 
     [SerializeField] [Range(0,30)]private int testX = 0;
     [SerializeField] [Range(0,30)]private int testY = 0;
-    
-    
-    // Update is called once per frame
+
+    private void Start()
+    {
+        string json = JsonUtility.ToJson("text");
+    }
+
     private void Update()
     {
         Debug.DrawRay(transform.position, transform.forward * 100, Color.green);

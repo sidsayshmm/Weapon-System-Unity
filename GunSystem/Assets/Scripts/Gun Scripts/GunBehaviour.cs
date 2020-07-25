@@ -32,7 +32,7 @@ public class GunBehaviour : MonoBehaviour
 
     private void Update()
     {
-
+    
         newAngle.x = Mathf.Lerp(newAngle.x, targetX, upSpeed * Time.deltaTime);   // Calculate the vertical rotation to wanna push up
         newAngle.y = Mathf.Lerp(newAngle.y, targetY, upSpeed * Time.deltaTime); // Calculate the horizontal rotation you wanna push up
                                                                                 //To do. Make this randomized to left||right
