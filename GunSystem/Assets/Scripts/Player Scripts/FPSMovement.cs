@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class FpsMovement : MonoBehaviour
+public class FPSMovement : MonoBehaviour
 {
     // Player info
     public GameObject player;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class FpsCameraControl : MonoBehaviour
+public class FPSCameraControl : MonoBehaviour
 {
     readonly float mouseSensitivity = 100f;
 

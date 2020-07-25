@@ -15,9 +15,14 @@ public class PrimaryGunsDefinition : BaseGunDefinition
 
         shootData.gunScript.fireTimer = 0f;
         shootData.gunScript.currentAcc -= shootData.gunScript.currentGun.accuracyDropPerShot;
+        
         if(shootData.gunScript.currentAcc <= 0)
             shootData.gunScript.currentAcc = 10;
-        AddAdsRecoil(shootData.gunObject);
+        
+        shootData.ShootStuff(shootData.centrePoint);
+        
+        if(shootData.useRecoil)
+            AddAdsRecoil(shootData.gunObject);
     }
 
     public override void HipFire(ShootData shootData)
@@ -28,9 +33,13 @@ public class PrimaryGunsDefinition : BaseGunDefinition
         
         shootData.gunScript.fireTimer = 0f;
         shootData.gunScript.currentAcc -= shootData.gunScript.currentGun.accuracyDropPerShot;
+        
         if(shootData.gunScript.currentAcc <= 0)
             shootData.gunScript.currentAcc = 10;
-        AddHipRecoil(shootData.gunObject);
+        
+        
+        if(shootData.useRecoil)
+            AddHipRecoil(shootData.gunObject);
     }
 
     public override void AddAdsRecoil(GameObject gunModel)

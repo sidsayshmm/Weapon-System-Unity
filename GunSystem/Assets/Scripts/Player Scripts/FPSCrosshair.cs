@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FpsCrosshair : MonoBehaviour
+public class FPSCrosshair : MonoBehaviour
 {
     private Texture2D texture;
     private GUIStyle lineStyle;
@@ -12,10 +12,10 @@ public class FpsCrosshair : MonoBehaviour
     [SerializeField] private int width = 35;
     private Vector2 centrePoint;
 
-    public int square = 20;
+
     public bool crosshair = true;
 
-    [SerializeField] [Range(6, 80)] float offset;
+    [SerializeField]  [ReadOnly]private float offset;
    // public EquippedGunBehaviour egb;
     public EquippedGun equippedGun;
     void Start()

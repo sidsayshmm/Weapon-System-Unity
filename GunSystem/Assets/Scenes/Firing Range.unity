@@ -756,8 +756,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194230}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -857,11 +857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98203786060117c45a8866deaff4becd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
-  width: 10
-  square: 20
+  height: 5
+  width: 35
   crosshair: 1
-  offset: 6
+  offset: 80
   equippedGun: {fileID: 1111742600}
 --- !u!1 &1022043069
 GameObject:
@@ -1016,7 +1015,7 @@ MonoBehaviour:
   currentShootMode: 0
   currentSightMode: 0
   burstTimer: 0
-  usingADS: 0
+  usingAds: 0
   continuousFire: 0
   rateOfFire: 0
   keyUp: 1
@@ -1027,6 +1026,7 @@ MonoBehaviour:
   actionTime: 0
   sliderMax: 1
   currentAcc: 219
+  fpsCamera: {fileID: 0}
 --- !u!114 &1111742601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1937,7 +1937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2062785066}
   speed: 6
-  jumpSpeed: 8
+  jumpSpeed: 810
   gravity: 20
 --- !u!143 &2062785073
 CharacterController:

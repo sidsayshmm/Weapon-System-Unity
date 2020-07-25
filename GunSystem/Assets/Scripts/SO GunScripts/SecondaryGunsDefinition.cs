@@ -18,11 +18,11 @@ public class SecondaryGunsDefinition : BaseGunDefinition
 
     public override void AddAdsRecoil(GameObject gunModel)
     {
-
+            
     }
 
     public override void AddHipRecoil(GameObject gunModel)
     {
-
+        
     }
 }

@@ -48,6 +48,7 @@ public class EquippedGun : MonoBehaviour
         get { return currentAcc; }
     }
 
+    public Camera fpsCamera;
     #endregion
 
     private void Awake()
@@ -60,6 +61,7 @@ public class EquippedGun : MonoBehaviour
     private void Start()
     {
        centerPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+       fpsCamera = Camera.main;
     }
 
     private void FixedUpdate()
@@ -180,14 +182,12 @@ public class EquippedGun : MonoBehaviour
         keyUp = false;
         if (currentSightMode == SightType.Ads)
         {
-            gunBehaviour.AdsFire();
-            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint);
+            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint, fpsCamera);
             currentGun.AdsFire(shootData);
         }
         else
         {
-            gunBehaviour.HipFire();
-            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint);
+            ShootData shootData = new ShootData(this.gameObject,this,true, centerPoint, fpsCamera);
             currentGun.AdsFire(shootData);
         }
     }

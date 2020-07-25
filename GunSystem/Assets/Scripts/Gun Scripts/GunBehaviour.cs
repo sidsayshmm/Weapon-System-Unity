@@ -47,90 +47,12 @@ public class GunBehaviour : MonoBehaviour
     private void LateUpdate()
     {
         ray = fpsCamera.ScreenPointToRay(centerPoint);
-        //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green);
     }
-
-    public void AdsFire()
-    {
-        equippedGun.Fire();
-        Debug.Log("ADS FIRE");
-        Recoil(equippedGun.continuousFire);
-        
-        if (equippedGun.currentShootMode == ShootModes.Burst)
-        {
-            equippedGun.burstCounter++;
-        }
-        equippedGun.fireTimer = 0f;
-        equippedGun.currentAcc -= equippedGun.currentGun.accuracyDropPerShot;   // Change it acc to ADS drop per shot
-        if (equippedGun.currentAcc <= 0)
-            equippedGun.currentAcc = 10;
-
-        ShootStuff(centerPoint);  //Do things to centrePoint
-    }
-
-    public void HipFire()
-    {
-        equippedGun.Fire();    
-        Debug.Log("HIP FIRE");
-       
-        if (usingRecoil)
-            Recoil(equippedGun.continuousFire);
-        
-        if (equippedGun.currentShootMode == ShootModes.Burst)
-        {
-            equippedGun.burstCounter++;
-        }
-
-        equippedGun.fireTimer = 0f;
-        equippedGun.currentAcc -= equippedGun.currentGun.accuracyDropPerShot;   // Change it acc to hipgfire drop per shot
-        if (equippedGun.currentAcc <= 0)
-        {
-            equippedGun.currentAcc = 10;
-            throw new Exception("well, go back to Unreal Blueprints");
-        }
-
-
-        ShootStuff(centerPoint);  //Do things to centrePoint
-    }
-
+    
     public void DrawCrosshair()
     {
 
     }
-
-    private void ShootStuff(Vector2 screenPointToFire)
-    {
-        var goalPoint = Vector3.zero;
-
-        RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
-        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 100f);
-        if (hits.Length != 0)
-        {
-            goalPoint = hits[hits.Length - 1].point;
-        }
-        else
-        {
-            // Get a point somehow... god knows how.
-        }
-
-        int notPlayerLayer = ~(1 << LayerMask.NameToLayer("Player"));
-        Vector3 startPoint = fpsCamera.transform.position;   // Figure out a way to set startPoint as gun muzzle
-        Vector3 bulletDir = (goalPoint - startPoint).normalized;
-
-        RaycastHit[] thiccCast = Physics.SphereCastAll(startPoint, 0.1f, bulletDir, 100f, notPlayerLayer);
-
-        //   Debug.DrawRay(startPoint, bulletDir * 1000, Color.green, 100f);
-
-        foreach (RaycastHit hitP in thiccCast)
-        {
-            var decal = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            decal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            decal.transform.position = hitP.point;
-            decal.gameObject.layer = 8;
-
-        }
-    }
-
     private void Recoil(int value)
     {
         if(value < 3)
