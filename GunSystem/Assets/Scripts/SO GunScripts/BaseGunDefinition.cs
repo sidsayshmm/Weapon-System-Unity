@@ -1,6 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Sirenix.OdinInspector;
 
-public abstract class BaseGunDefinition : ScriptableObject, IShootable , IRecoilable
+
+[Flags]
+public enum Attachments
+{
+    Stock = (1<<0),
+    Sight= (1<<1),
+    Blah = (1<<2),
+    Magazine = (1<<3)
+}
+public abstract class BaseGunDefinition : SerializedScriptableObject, IShootable , IRecoilable
 {
     public string weaponName;
     public Mesh gunMesh;
@@ -33,6 +44,17 @@ public abstract class BaseGunDefinition : ScriptableObject, IShootable , IRecoil
     [Header("Burst Details")]
     public float burstPause;
     public float burstRate;
+
+
+    public Attachments bleh;
+    
+    public void blaaa()
+    {
+        if (bleh.HasFlag(Attachments.Magazine))
+        {
+            //Something..
+        }
+    }
     
     public abstract void AdsFire(ShootData shootData);
     public abstract void HipFire(ShootData shootData);

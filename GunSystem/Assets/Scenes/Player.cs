@@ -26,6 +26,7 @@ namespace MyTests
             fpsCamera = Camera.main;
             centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
             initalAngle = fpsCamera.transform.localEulerAngles;
+            
         }
 
         private void Update()

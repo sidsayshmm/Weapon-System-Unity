@@ -20,7 +20,7 @@ MonoBehaviour:
   modeChanges: 0
   availableShootModes: 0
   clipSize: 30
-  maxClips: 90
+  maxAmmo: 0
   reloadTime: 3
   shotsPerRound: 1
   firingRate: 5
@@ -31,3 +31,4 @@ MonoBehaviour:
   scopeOutTime: 0
   burstPause: 0
   burstRate: 0
+  bleh: 0
