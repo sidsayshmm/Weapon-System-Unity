@@ -172,7 +172,7 @@ public class EquippedGun : MonoBehaviour
         continuousFire = 0;
         rateOfFire = 1.0f / currentGun.firingRate;
         doingAction = false;
-        currentShootMode = currentGun.defShootMode;
+        currentShootMode = currentGun.defaultShootMode;
         currentSightMode = SightType.Normal;
         currentAcc = currentGun.maxAccuracy;
     }

@@ -12,17 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094959eabc9ae174c9a1fdc46e3cb26e, type: 3}
   m_Name: Deagle
   m_EditorClassIdentifier: 
-  weaponName: Deagle
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: shootModes
+      Entry: 6
+      Data: 
+    - Name: sightModes
+      Entry: 6
+      Data: 
   gunMesh: {fileID: 0}
+  weaponName: Deagle
+  clipSize: 7
+  maxAmmo: 3
+  reloadTime: 3
+  shotsPerRound: 1
   weaponType: 0
   sightType: 1
-  defShootMode: 0
-  modeChanges: 0
+  availableSightTypes: 0
+  defaultShootMode: 0
   availableShootModes: 0
-  clipSize: 7
-  maxClips: 21
-  reloadTime: 2
-  shotsPerRound: 1
+  availableAttachments: 0
   firingRate: 1
   accuracyDropPerShot: 20
   accuracyGainPerSec: 10

@@ -12,17 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094959eabc9ae174c9a1fdc46e3cb26e, type: 3}
   m_Name: USP-S
   m_EditorClassIdentifier: 
-  weaponName: USP-S
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: shootModes
+      Entry: 6
+      Data: 
+    - Name: sightModes
+      Entry: 6
+      Data: 
   gunMesh: {fileID: 0}
+  weaponName: USP-S
+  clipSize: 12
+  maxAmmo: 3
+  reloadTime: 3
+  shotsPerRound: 1
   weaponType: 1
   sightType: 1
-  defShootMode: 0
-  modeChanges: 0
+  availableSightTypes: 0
+  defaultShootMode: 0
   availableShootModes: 0
-  clipSize: 12
-  maxClips: 3
-  reloadTime: 2
-  shotsPerRound: 1
+  availableAttachments: 0
   firingRate: 0.3
   accuracyDropPerShot: 10
   accuracyGainPerSec: 5

@@ -23,7 +23,8 @@ namespace MyTests
 
         private void Awake()
         {
-            fpsCamera = Camera.main;
+            Debug.Log("Active");
+                fpsCamera = Camera.main;
             centerPoint = new Vector2(Screen.width / 2, Screen.height / 2);
             initalAngle = fpsCamera.transform.localEulerAngles;
             

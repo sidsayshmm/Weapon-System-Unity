@@ -1,5 +1,8 @@
-﻿public enum SightType
+﻿using System;
+
+[Flags]
+public enum SightType
 {
-    Ads,
-    Normal
+    Ads = (1<<0),
+    Normal = (1<<1)
 }

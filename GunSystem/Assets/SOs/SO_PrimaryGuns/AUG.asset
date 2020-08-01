@@ -12,17 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61761013a0ca2334c81ff0fadb9f0398, type: 3}
   m_Name: AUG
   m_EditorClassIdentifier: 
-  weaponName: AUG
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: shootModes
+      Entry: 7
+      Data: 0|IShootModes[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: sightModes
+      Entry: 7
+      Data: 1|ISightModes[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   gunMesh: {fileID: 0}
-  weaponType: 0
-  sightType: 0
-  defShootMode: 0
-  modeChanges: 0
-  availableShootModes: 0
+  weaponName: AUG
   clipSize: 30
   maxAmmo: 30
   reloadTime: 3
   shotsPerRound: 1
+  weaponType: 0
+  sightType: 0
+  availableSightTypes: 0
+  defaultShootMode: 0
+  availableShootModes: 0
+  availableAttachments: 0
   firingRate: 5
   accuracyDropPerShot: 10
   accuracyGainPerSec: 10

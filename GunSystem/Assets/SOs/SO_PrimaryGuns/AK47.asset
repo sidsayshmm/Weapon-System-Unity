@@ -12,17 +12,134 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61761013a0ca2334c81ff0fadb9f0398, type: 3}
   m_Name: AK47
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: attachmentModifiers
+      Entry: 7
+      Data: 0|Attachables[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: Attachables, Assembly-CSharp
+    - Name: attachmentName
+      Entry: 3
+      Data: 0
+    - Name: attributes
+      Entry: 7
+      Data: 1|AttachmentModifiers[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: AttachmentModifiers, Assembly-CSharp
+    - Name: name
+      Entry: 3
+      Data: 4
+    - Name: type
+      Entry: 3
+      Data: 1
+    - Name: modifierValue
+      Entry: 4
+      Data: 1.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Attachables, Assembly-CSharp
+    - Name: attachmentName
+      Entry: 3
+      Data: 1
+    - Name: attributes
+      Entry: 7
+      Data: 2|AttachmentModifiers[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: AttachmentModifiers, Assembly-CSharp
+    - Name: name
+      Entry: 3
+      Data: 4
+    - Name: type
+      Entry: 3
+      Data: 1
+    - Name: modifierValue
+      Entry: 4
+      Data: 0.1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: AttachmentModifiers, Assembly-CSharp
+    - Name: name
+      Entry: 3
+      Data: 2
+    - Name: type
+      Entry: 3
+      Data: 1
+    - Name: modifierValue
+      Entry: 4
+      Data: 12345
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  gunMesh: {fileID: 4024518500448221446, guid: c7ab2d49c4e43de44b7d53e860daee73, type: 3}
   weaponName: AK47
-  gunMesh: {fileID: 0}
-  weaponType: 0
-  sightType: 1
-  defShootMode: 0
-  modeChanges: 0
-  availableShootModes: 0
   clipSize: 30
-  maxAmmo: 0
+  maxAmmo: 90
   reloadTime: 3
   shotsPerRound: 1
+  weaponType: 0
+  sightType: 1
+  availableSightTypes: 3
+  defaultShootMode: 0
+  availableShootModes: 5
+  availableAttachments: 15
+  burstFireDetails:
+    burstRate: 1
+    burstPause: 1
+    burstCount: 2
+  semiFireDetails:
+    firingRate: 1
+  autoFireDetails:
+    firingRate: 1
   firingRate: 5
   accuracyDropPerShot: 50
   accuracyGainPerSec: 5
@@ -31,4 +148,3 @@ MonoBehaviour:
   scopeOutTime: 0
   burstPause: 0
   burstRate: 0
-  bleh: 0
