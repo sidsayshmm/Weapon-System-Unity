@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New GunDefinition", menuName = "New Secondary Gun")]
+[CreateAssetMenu(fileName = "New GunDefinition", menuName = "Old/New Secondary Gun")]
 public class SecondaryGunsDefinition : BaseGunDefinition
 {
     public override void AdsFire(ShootData shootData)

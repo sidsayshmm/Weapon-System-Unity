@@ -14,6 +14,7 @@ public class Testt : MonoBehaviour
     private void Start()
     {
         string json = JsonUtility.ToJson("text");
+        GetComponent<AudioSource>()?.Play();
     }
 
     private void Update()
